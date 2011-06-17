@@ -34,7 +34,8 @@ class RoomQuery:
                 self.rooms.append(room_name)
 
     def queryRooms(self):
-        jid=xmpp.protocol.JID(speeqeweb.settings.XMPP_USER+"/listrooms")
+        #jid=xmpp.protocol.JID(speeqeweb.settings.XMPP_USER+"/listrooms")
+        jid=xmpp.protocol.JID(node=speeqeweb.settings.XMPP_USER,domain=speeqeweb.settings.XMPP_DOMAIN,resource='/listrooms') 		
         client = xmpp.Client(jid.getDomain(),debug=[])
         if client.connect(use_srv=True):
             if client.auth(jid.getNode(),speeqeweb.settings.XMPP_PASS,sasl=1):
