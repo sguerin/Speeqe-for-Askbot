@@ -285,7 +285,7 @@ var Speeqe = {
 		});
 
 		$("#changeuser").click(function() {
-		    var new_url = "https://"+Speeqe.HTTP_DOMAIN+"/accounts/login/";
+		    var new_url = "http://"+Speeqe.HTTP_DOMAIN+"/accounts/login/";
 		    if (app._chatroom)
 			{
 			    new_url_array = ["?next=http://",
