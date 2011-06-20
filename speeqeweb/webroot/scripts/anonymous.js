@@ -2,50 +2,7 @@
   Copyright 2007-2008 Nathan Zorn OGG, LLC
   See LICENSE.txt 
 */
-Speeqe.NAMES = ["obama",
-	        "bush",
-		"cheney",
-		"ford",
-		"nixon",
-		"reagan",
-		"clinton",
-		"carter",
-		"washington",
-		"taft",
-		"madison",
-		"anonymous",
-		"coward",
-		"lurker",
-		"lincoln",
-		"adams",
-		"jefferson",
-		"monroe",
-		"quincyadams",
-		"jackson",
-		"vanburen",
-		"harrison",
-		"tyler",
-		"polk",
-		"taylor",
-		"fillmore",
-		"pierce",
-		"buchanan",
-		"johnson",
-		"grant",
-		"hayes",
-		"garfield",
-		"arthur",
-		"cleveland",
-		"mckinley",
-		"roosevelt",
-		"wilson",
-		"harding",
-		"coolidge",
-		"hoover",
-		"truman",
-		"eisenhower",
-		"kennedy"	     
-		];
+Speeqe.NAMES = ["anonymous"];
 
 Speeqe.random =  function(num) {
     return Math.floor(Math.random() * num)+1;
