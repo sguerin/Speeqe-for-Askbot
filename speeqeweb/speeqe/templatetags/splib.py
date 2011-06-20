@@ -8,6 +8,9 @@ register = Library()
 @register.simple_tag
 def current_domain():
     return settings.HTTP_DOMAIN
+@register.simple_tag
+def xmpp_domain():
+    return settings.XMPP_DOMAIN
     
 #return all active muc rooms
 class ActiveRoomsNode(Node):
@@ -15,7 +18,7 @@ class ActiveRoomsNode(Node):
 
     def render(self, context):
         try:
-            context['rooms'] = muc.listrooms()[:5]
+            context['rooms'] = muc.listrooms()[:100]
         except:
             pass
         return ''
