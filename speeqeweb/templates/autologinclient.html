@@ -50,7 +50,7 @@
 	   app.setChatroom("{{ room }}");
 	   {% endif %}
 {% if username %}
-           //var cred_url = 'https://{% current_domain %}/client/';
+           //var cred_url = 'http://{% current_domain %}/client/';
 	   //it seems ssl will cause a cross site error
 	   var cred_url = '/client/';
 	   jQuery.get(cred_url,{cred:'1'},
