@@ -7,6 +7,7 @@
 from django import forms
 from speeqeweb.speeqe.models import Member
 from speeqeweb.settings import HTTP_DOMAIN,XMPP_DOMAIN,EXACT_BAD_WORDS,MATCH_BAD_WORDS
+from django.conf import settings
 
 #error strings used when throwing form validation exceptions. An
 #exception class might be overkill?
@@ -76,14 +77,14 @@ def validate_email(email):
         raise forms.ValidationError(error_strings['invalid_domain']%HTTP_DOMAIN)
 
 
-    try:
-        domainname = email.split("@")[1]
-        import dns.resolver
-        answers = dns.resolver.query(domainname.encode('utf8'), 'MX')
-    except ImportError:
-        pass
-    except:
-        raise forms.ValidationError(error_strings['invalid_email'])
+#    try:
+#        domainname = email.split("@")[1]
+#        import dns.resolver
+#        answers = dns.resolver.query(domainname.encode('utf8'), 'MX')
+#    except ImportError:
+#        pass
+#    except:
+#        raise forms.ValidationError(error_strings['invalid_email'])
 
 
     tuser, thost = email.split('@', 1)
