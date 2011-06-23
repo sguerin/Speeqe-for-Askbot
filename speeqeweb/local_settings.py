@@ -38,11 +38,9 @@ XMPP_PASS = ''
 XMPP_CHAT = 'conference.tribe.com'
 #the name of your bosh server. Bosh is used to authenticate users to
 #the website and then they are auto logged in to each chat room.
-#BOSH_HOST = "tribe.com"
-BOSH_HOST = "tribe"
+BOSH_HOST = "tribe.com"
 #the port your bosh server listens on
-#BOSH_PORT = "7070"
-BOSH_PORT = "5280"
+BOSH_PORT = "7070"
 #the url used to proxy to your bosh server
 BOSH_URL = "/http-bind"
 
@@ -56,9 +54,9 @@ FEATURED_ROOMS =  {'Alpha Room':'/room/alpha/', 'Beta Room':'/room/beta/', }
 #of your themes and client.html, test_client.html in this config
 #option
 TEMPLATE_DIRS = (
-    '/var/www/speeqeweb/templates',
+    '/var/www/speeqe/speeqeweb/templates',
     '/lib/python/speeqeweb/templates',    
-    '/var/www/speeqeweb/webroot',
+    '/var/www/speeqe/speeqeweb/webroot',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.

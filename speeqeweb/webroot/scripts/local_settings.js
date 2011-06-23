@@ -1,5 +1,5 @@
-//domain for your website
-Speeqe.HTTP_DOMAIN = "tribe;
+//domain for your website (used to build url in java scripts)
+Speeqe.HTTP_DOMAIN = "tribe";
 //domain for your jabber server
 Speeqe.XMPP_DOMAIN = "tribe";
 //domain for your multi user chat server
