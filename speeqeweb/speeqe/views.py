@@ -182,7 +182,7 @@ def ajax_login(request):
 	valid = False
 	try:
 		if username:
-			errors = xmpp_auth(request)
+			#errors = xmpp_auth(request)
 			if not errors:
 				create_django_session(request)
 				valid = True
@@ -206,7 +206,7 @@ def login(request):
 
 	if request.method == "POST":
 		
-		errors = xmpp_auth(request)
+		#errors = xmpp_auth(request)
 		
 		#authenticate to django and update user object
 		if not errors:
