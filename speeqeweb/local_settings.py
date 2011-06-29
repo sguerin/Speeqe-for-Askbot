@@ -48,7 +48,7 @@ BOSH_URL = "/http-bind"
 #the rooms that will be displayed on the speeqe web pages. The first
 #entry is the title, followed by the room url.  You can use /room/ or
 #the dns trick if you have that setup.
-FEATURED_ROOMS =  {'Alpha Room':'/room/alpha/', 'Beta Room':'/room/beta/', }
+FEATURED_ROOMS =  {'ore':'/room/ore/', 'mad':'/room/mad/', }
 
 #where all your django templates live.  make sure to have the location
 #of your themes and client.html, test_client.html in this config

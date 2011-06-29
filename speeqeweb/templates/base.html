@@ -3,11 +3,8 @@
 {% load splib %}
 {% use_dns_room_names %}
 <head>
-<title>{% block title %}{% endblock %}</title>
+<title>{% block title %}Chat rooms list{% endblock %}</title>
 <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen" />
-<!--[if lt IE 7]>
-<link rel="stylesheet" href="/css/style_ie6.css" type="text/css" media="screen" />
-<![endif]-->
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 <script type="text/javascript">
 // If googleapis failed, load locally
@@ -17,20 +14,12 @@
 <script type="text/javascript">
       $(document).ready(function(){
 
-          $("#toggleactiverooms").click(function() {
-              $("#featuredrooms").hide();
-              $("#activerooms").show();
-              return false;
-          });
-
-          $("#togglefeaturedrooms").click(function() {
-              $("#activerooms").hide();
-              $("#featuredrooms").show();
-              return false;
-          });
-
-          $("#activerooms").hide();
-
+		  $(".roomcard").click(function (evt) {
+				if ($(evt.target).is("a"))
+					return;
+				$(this).toggle("showmore");
+		  });
+		  
           $("#createroom > form").submit(function() {
 	      {% if dns_room_names %}
               new_loc = ["http://",
@@ -49,107 +38,53 @@
 </script>
 {% block head %}{% endblock %}
 </head>
-<body>
-<div id="container">
-
-<div id="top">
-<a href="/"><img src="/images/homelogo.png" alt="speeqe" /></a>
-<div id="menu">
-<ul class="tabs">
-<li>
-<div class="leftcorneractive"></div>
-<div class="middleactive"><a href="/"><img alt="chat" src="/images/chat.png" /></a></div>
-<div class="rightcorneractive"></div>
-</li>
-<li>
-<div class="leftcorner"></div>
-{% if user.is_authenticated %}
-<div class="middle">
-<a href="/accounts/logout/"><img alt="logout" src="/images/logout.png" /></a></div>
-{% else %}
-<div class="middle">
-<a href="http://{% current_domain %}/accounts/login/?next=http://{% current_domain %}/"><img alt="login" src="/images/login.png" /></a>
-</div>
-{% endif %}
-<div class="rightcorner"></div>
-</li>
-<li>
-<div class="leftcorneractive"></div>
-<div class="middleactive"><a href="/messagesearch/"><img alt="search" src="/images/search.png" /></a></div>
-<div class="rightcorneractive"></div>
-</li>
-</ul>
-</div>
-<div class="clear"></div>
-
-
-<div class="topround"></div>
-<div class="box">
-{% block content %}
-{% endblock %}
-<div class="clear"></div>
-</div>
-<div class="bottomround"></div>
-
-
-<div id="rooms">
-<ul class="tabs">
-<li>
-<div class="leftcorneractive"></div>
-<div class="middleactive">
-<a href="#featuredrooms" id="togglefeaturedrooms" class="togglerooms">
-<img alt="featured" src="/images/featured.png" />
-</a>
-</div>
-<div class="rightcorneractive"></div>
-</li>
-<li>
-<div class="leftcorner"></div>
-<div class="middle">
-<a href="#activerooms" id="toggleactiverooms" class="togglerooms">
-<img alt="active" src="/images/active.png" />
-</a>
-</div>
-<div class="rightcorner"></div>
-</li>
-</ul>
-</div>
-<div class="clear"></div>
-
-<div class="topround"></div>
-<div class="box" id="featuredrooms">
-{% show_featured_rooms %}
-{% for room in featuredrooms %}
-<div class="avatar">
-<a href="{{room.url}}">
-<img alt="chatroom" src="/images/avatar_overlay.png" class="avataroverlay" />
-<img alt="chatroom" src="/images/avatar_overlay_ie6.png" class="avataroverlay_ie6" />
-<img alt="avatar" src="/images/avatar.jpg" class="avatarimg" />
-<h4>{{room.name}}</h4>
-</a>
-</div>
-{% endfor %}
-<div class="clear"></div>
-</div>
-
-<div class="box" id="activerooms">
-{% show_rooms %}
-{% for room in rooms %}
-<div class="avatar">
-<a href="http://{% current_domain %}/room/{{room}}/">
-<img alt="chatroom" src="/images/avatar_overlay.png" class="avataroverlay" />
-<img alt="chatroom" src="/images/avatar_overlay_ie6.png" class="avataroverlay_ie6" />
-<img alt="avatar" src="/images/avatar.jpg" class="avatarimg" />
-<h4>{{room}}</h4>
-</a>
-</div>
-{% endfor %}
-
-<div class="clear"></div>
-</div>
-
-<div class="bottomround"></div>
-
-</div>
-</body>
+<body ="mob">
+    <div id="container">
+		<div id="content">
+			<div>
+				<form id="joincreate" method="get" action="/client/" ="inline">
+					<label>Join or Create a room @ http://{% current_domain %}/room/</label><stro
+					<input id="filter" name="room" value="room name" onclick="this.value='';" size="12" type="text">
+					{% if user.is_authenticated %}
+					    <input ="button" value="Go" type="submit">
+			        {% else %}
+						<input ="button" value="log in" href="http://{% current_domain %}/accounts/login/?next=http://{% current_domain %}/">
+			        {% endif %}
+				</form>
+			</div>
+			{% if user.is_authenticated %}
+				<div><br><a id="login" ="button" href="/accounts/logout/">logout</a></div>
+			{% else %}
+				<div><br><a id="login" ="button" href="http://{% current_domain %}/accounts/login/?next=http://{% current_domain %}/">log in</a></div>		
+			{% endif %}
+			{% block content %}
+			{% endblock %}
+			{% show_rooms %}
+			{% for room in rooms %}
+				<div ="roomcard ">
+					<div ="room-header">
+						<h3>
+                            {% if room.is_featured %}
+                                <img ="small-site-logo" title="Support team" src="/images/murex/fireman.jpg" height="16" width="16">
+                            {% endif %}
+							<span ="room-name"><a href="http://{% current_domain %}/room/{{room.name}}/">{{room.name}}</a></span>
+						</h3>
+						<div ="room-description clear-both">{{room.description}}</div>
+					</div>
+					<div ="room-details">
+						{{room.occupants}} users connected<br>
+						created {{room.creationdate}}
+					</div>
+					<div ="clear-both"></div>
+					<div ="actions">
+						<a href="http://{% current_domain %}/room/{{room.name}}/" ="button">join</a>
+						<a href="http://..." ="button" onclick="return false">history</a>
+						<a href="http://..." ="button" onclick="return false">conversations</a>
+					</div>
+				</div>
+			{% endfor %}
+        </div>
+	</div>
+     
+ </body>
 </html>

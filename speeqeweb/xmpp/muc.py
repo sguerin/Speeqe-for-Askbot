@@ -6,7 +6,7 @@
 
 import xmpp
 import speeqeweb.settings
-
+from operator import itemgetter, attrgetter
 
 class XMMPAuthError(Exception):
     """Unable to authenticate to configured xmpp server. """
@@ -24,6 +24,11 @@ class ChatRoom:
         self.description = description
         self.occupants = occupants
         self.creationdate = creationdate
+		self.isFeatured == False
+    def __repr__(self):
+        return repr((self.name, self.description, self.occupants, self.creationdate))
+    def is_featured(self):
+		return self.isFeatured
 
 class RoomQuery:
     def __init__(self):
@@ -34,6 +39,7 @@ class RoomQuery:
         """Used to retrieve the list of rooms from the conference service. """
 
         if response.getType() == 'result':
+            featured_rooms=[]
             for node in response.getQueryPayload():
                 room_jid = node.getAttr('jid')
                 #room_name = room_jid.split('@')[0]
@@ -69,12 +75,20 @@ class RoomQuery:
                                         description = room_desc,
                                         occupants = room_occupants,
                                         creationdate = room_creationdate)
-                        self.rooms.append(room)
+                        for key in speeqeweb.settings.FEATURED_ROOM
+                            if room.name == key :
+                                room.isFeatured == True
+                                setattr(room, 'isFeatured', True)
+                                break
+                        if room.isFeatured == True :
+                            featured_rooms.append(room)			
                     else:
                         print "Unable to authenticate via xmpp."
                 else:
                     print "Unable to connect via xmpp."
-
+            #sorted(self.rooms,key=attrgetter('occupants'), reverse=True)
+            #print self.rooms
+            self.rooms =  featured_rooms + self.rooms
     def queryRooms(self):
         #jid=xmpp.protocol.JID(speeqeweb.settings.XMPP_USER+"/listrooms")
         jid=xmpp.protocol.JID(node=speeqeweb.settings.XMPP_USER,domain=speeqeweb.settings.XMPP_DOMAIN,resource='/listrooms')
