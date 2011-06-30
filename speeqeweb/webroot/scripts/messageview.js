@@ -416,7 +416,6 @@ Speeqe.MessageView.prototype = {
     
     htmlLink: function(text,auto_inline) {
 	var imgurl = /((?:ht|f)tps?:\/\/.+\.(png|jpeg|jpg|gif|bmp)$)/ig;
-	var mp3url = /((?:ht|f)tps?:\/\/.+\.(mp3|ogg)$)/ig;
 	var linksReg = /((?:ht|f)tps?:\/\/[\S|\?]+)/g;
 	var ahtmlReg = /<a.+href.+>.+<\/a>.*/g;
         var retval = "";
@@ -427,14 +426,12 @@ Speeqe.MessageView.prototype = {
 	    var match = text_val.match(linksReg);
 
 	    var imgmatch = false;
-	    var mp3match = false;
 		
 	    if(auto_inline)
 	    {
 		imgmatch = text_val.match(imgurl);
-		mp3match = text_val.match(mp3url);
 	    }
-	    if (match && !amatch && !imgmatch &&!mp3match)
+	    if (match && !amatch && !imgmatch)
 	    {
 		var urltext = text_val;
 		jQuery.each(match,function(i,val) {
@@ -455,19 +452,6 @@ Speeqe.MessageView.prototype = {
 
 		});
 		retval += urltext;
-	    }
-            else if (mp3match)
-            {
-                var newEl = ["<a target=\"_blank\" href=\"",
-                             mp3match[0],
-                             "\">",
-                             mp3match[0],
-                             "</a>"];
-                $("#thejplayer").show();
-                Speeqe.Jplayer.setFile(mp3match[0]);
-                //$("#jquery_jplayer").remove();
-                retval += text_val.replace(new RegExp(mp3match[0],"g"),
-                                           newEl.join(""));
 	    }
             else if (imgmatch)
             {
