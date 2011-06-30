@@ -232,7 +232,7 @@ body {
    border: none;
 }
 
-#layer1, #noscript, #debug_log_layer1,#configure_room_form, #room_password_dialog {
+#layer1, #noscript, #configure_room_form, #room_password_dialog {
    position: absolute;
    left: 200px;
    top: 100px;
@@ -245,7 +245,7 @@ body {
 #configure_room_form {
    width: 380px;
 }
-#layer1_handle, #debug_log_layer1_handle,#configure_room_form_handle,#room_password_dialog_handle {
+#layer1_handle, #configure_room_form_handle,#room_password_dialog_handle {
    background-color: #5588bb;
    padding: 2px;
    text-align: center;
@@ -254,7 +254,7 @@ body {
    vertical-align: middle;
 }
 
-#layer1_content, #debug_log_layer1_content,#configure_room_form_content,#room_password_dialog_content {
+#layer1_content, #configure_room_form_content,#room_password_dialog_content {
    padding: 5px;
 }
 
