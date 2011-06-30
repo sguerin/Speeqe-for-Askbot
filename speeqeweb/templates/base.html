@@ -92,7 +92,7 @@
                         {% if user.is_authenticated %}
 						<a href="http://{% current_domain %}/room/{{room.name}}/" target="_blank" class="button">join</a>
                         {% else %}
-                        <a href="http://{% current_domain %}/accounts/login/?next=http://{% current_domain %}/" class="button">join</a>
+                        <a href="http://{% current_domain %}/accounts/login/?next=http://{% current_domain %}/room/{{room.name}}/" class="button">join</a>
 						{% endif %}
 						<a href="http://..." class="button" onclick="return false">history</a>
 						<a href="http://..." class="button" onclick="return false">conversations</a>
