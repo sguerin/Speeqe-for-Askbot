@@ -43,13 +43,20 @@
 		<div id="content">
 			<div>
 				<form id="joincreate" method="get" action="/client/" class="inline">
-					<label>Join or Create a room @ http://{% current_domain %}/room/</label>
+			        {% if dns_room_names %}
+                        <label>Join or Create a room @ http://</label>
+                    {% else %}
+					    <label>Join or Create a room @ http://{% current_domain %}/room/</label>
+			        {% endif %}
 					<input id="filter" name="room" value="room name" onclick="this.value='';" size="12" type="text">
 					{% if user.is_authenticated %}
 					    <input class="button" value="Go" target="_blank" type="submit">
 			        {% else %}
-						<input class="button" value="Go" href="http://{% current_domain %}/accounts/login/?next=http://{% current_domain %}/">
-			        {% endif %}
+                        <input class="button" value="Go" href="http://{% current_domain %}/accounts/login/?next=http://{% current_domain %}/">
+                    {% endif %}
+			        {% if dns_room_names %}
+						<label>.{% current_domain %}</label>
+                    {% endif %} 
 				</form>
 			</div>
 			{% if user.is_authenticated %}
