@@ -17,7 +17,7 @@
 		  $(".roomcard").click(function (evt) {
 				if ($(evt.target).is("a"))
 					return;
-				$(this).toggle("showmore");
+				$(this).toggleClass("showmore");
 		  });
 		  
           $("#createroom > form").submit(function() {
@@ -38,48 +38,57 @@
 </script>
 {% block head %}{% endblock %}
 </head>
-<body ="mob">
+<body class="mob">
     <div id="container">
 		<div id="content">
 			<div>
-				<form id="joincreate" method="get" action="/client/" ="inline">
-					<label>Join or Create a room @ http://{% current_domain %}/room/</label><stro
+				<form id="joincreate" method="get" action="/client/" class="inline">
+					<label>Join or Create a room @ http://{% current_domain %}/room/</label>
 					<input id="filter" name="room" value="room name" onclick="this.value='';" size="12" type="text">
 					{% if user.is_authenticated %}
-					    <input ="button" value="Go" type="submit">
+					    <input class="button" value="Go" target="_blank" type="submit">
 			        {% else %}
-						<input ="button" value="log in" href="http://{% current_domain %}/accounts/login/?next=http://{% current_domain %}/">
+						<input class="button" value="Go" href="http://{% current_domain %}/accounts/login/?next=http://{% current_domain %}/">
 			        {% endif %}
 				</form>
 			</div>
 			{% if user.is_authenticated %}
-				<div><br><a id="login" ="button" href="/accounts/logout/">logout</a></div>
+				<div><br><a id="login" class="button" href="/accounts/logout/">logout</a></div>
 			{% else %}
-				<div><br><a id="login" ="button" href="http://{% current_domain %}/accounts/login/?next=http://{% current_domain %}/">log in</a></div>		
+				<div><br><a id="login" class="button" href="http://{% current_domain %}/accounts/login/?next=http://{% current_domain %}/">log in</a></div>		
 			{% endif %}
 			{% block content %}
 			{% endblock %}
+            </br>
 			{% show_rooms %}
 			{% for room in rooms %}
-				<div ="roomcard ">
-					<div ="room-header">
+                {% if room.is_featured %}
+                <div class="roomcard showmore">
+                {% else %}
+				<div class="roomcard ">
+                {% endif %}
+					<div class="room-header">
 						<h3>
                             {% if room.is_featured %}
-                                <img ="small-site-logo" title="Support team" src="/images/murex/fireman.jpg" height="16" width="16">
+                                <img class="small-site-logo" title="Support team" src="/images/murex/fireman.png" height="16" width="16">
                             {% endif %}
-							<span ="room-name"><a href="http://{% current_domain %}/room/{{room.name}}/">{{room.name}}</a></span>
+							<span class="room-name"><a href="http://{% current_domain %}/room/{{room.name}}/">{{room.name}}</a></span>
 						</h3>
-						<div ="room-description clear-both">{{room.description}}</div>
+						<div class="room-description clear-both">{{room.description}}</div>
 					</div>
-					<div ="room-details">
+					<div class="room-details">
 						{{room.occupants}} users connected<br>
 						created {{room.creationdate}}
 					</div>
-					<div ="clear-both"></div>
-					<div ="actions">
-						<a href="http://{% current_domain %}/room/{{room.name}}/" ="button">join</a>
-						<a href="http://..." ="button" onclick="return false">history</a>
-						<a href="http://..." ="button" onclick="return false">conversations</a>
+					<div class="clear-both"></div>
+					<div class="actions">
+                        {% if user.is_authenticated %}
+						<a href="http://{% current_domain %}/room/{{room.name}}/" target="_blank" class="button">join</a>
+                        {% else %}
+                        <a href="http://{% current_domain %}/accounts/login/?next=http://{% current_domain %}/" class="button">join</a>
+						{% endif %}
+						<a href="http://..." class="button" onclick="return false">history</a>
+						<a href="http://..." class="button" onclick="return false">conversations</a>
 					</div>
 				</div>
 			{% endfor %}
