@@ -12,7 +12,7 @@ See LICENSE.txt
 Speeqe.helpDialogInit = function() {
     var help_dialog_html = "     <div id=\"popupContact\">  \
          <a id=\"popupContactClose\">x</a>  \
-         <h1>Speeqe Help.</h1>  \
+         <h1>Help</h1>  \
          <p id=\"contactArea\">  \
              <h2>Keyboard shortcuts.</h2> \
              <ul> \
@@ -21,9 +21,6 @@ Speeqe.helpDialogInit = function() {
              <h2>List of chat commands.</h2>  <ul><li>/help : brings up this screen.<li> \
              <li>/topic [topic] :changes the room topic if you have permission.</li>\
              <li>/join [room name]: opens a new window with the specified room.</li> \
-             <li>/kick,/ban [user]: Removes user from the room. /ban does so permanently. </li> \
-             <li>/unban [user]: Allows user to join the room again.</li>\
-             <li>/nick [nickname]: Changes your nick name to the one specified. </li>\
              <li>@nick [message]: Using the @ sign will send a private message to the specified user. </li>\
              </ul>" + Speeqe.helpDialogHtml
     +"<br/><br/>  \
