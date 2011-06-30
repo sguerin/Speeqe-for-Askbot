@@ -20,7 +20,6 @@ urlpatterns = patterns('',
     (r'^themes/edit/(?P<theme_id>\d+)/', 'speeqeweb.speeqe.views.edit_theme'),
     (r'^themes/link/', 'speeqeweb.speeqe.views.link_theme_to_room'),
     (r'^themes/$', 'speeqeweb.speeqe.views.list_themes'),
-    (r'^submit_log/', 'speeqeweb.speeqe.views.submit_log'),
     # Uncomment this for admin:
     (r'^admin/', include('django.contrib.admin.urls')),
 

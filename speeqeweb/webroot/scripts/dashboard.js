@@ -35,8 +35,7 @@ Speeqe.dashBoardInit = function() {
                                         <li class=\"button\"> \
                                                 <p id=\"help\" class=\"menu-item\"><span>Help</span></p> \
                                                 <ul> \
-                         <li id='debug_log_show'><span>Problem Report</span></li> \
-                                                        <li id='show_help_dialog'><span>Help?</span></li> \
+                                                                                 <li id='show_help_dialog'><span>Help?</span></li> \
                                                 </ul> \
                                         </li> \
                                         <li class=\"button\"> \

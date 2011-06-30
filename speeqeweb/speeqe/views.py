@@ -445,37 +445,3 @@ def confirm_email(request):
 			       'confirmemail.html',
 			       context)
 
-
-def submit_log(request):
-
-	description = request.POST.get('description',"No description.")
-	log = request.POST.get('debuglog',None)
-	response_string = "<submitlog msg=\"Error\">invalid</submitlog>"
-	valid = False
-	try:
-		if log:
-			#translate log data
-			log = log.replace('&','&amp;')
-			log = log.replace('<','&lt;')
-			log = log.replace('>','&gt;')
-			file_date = datetime.datetime.now().strftime('%a_%d_%b_%Y_%T')
-			file_name = "/"+file_date+"_log.html"
-			f = open(settings.LOG_ROOT+file_name,'w')
-			f.write("<html><head><link rel=\"stylesheet\" type=\"text/css\" src=\"/scripts/firebug/firebug.css\"></link></head><body>"+log+"</body></html>")
-			f.close()
-			log_url = "http://" + settings.HTTP_DOMAIN + "/debuglogs/" + file_name
-			message = description + "\n\n" + log_url
-			
-			send_email(settings.HELP_EMAIL,
-				   'Speeqe Problem Report',
-				   message,
-				   sender=settings.HELP_EMAIL,
-				   frm=settings.HELP_EMAIL)
-			valid = True
-		else:
-			response_string="<submitlog msg=\"No log submitted.\">invalid</submitlog>"
-	except Exception,ex:
-		response_string = "<submitlog msg=\"Error:"+str(ex)+"\">invalid</submitlog>"
-	if valid:
-		response_string = "<submitlog msg=''>valid</submitlog>"
-	return HttpResponse(response_string,mimetype="text/xml")	
