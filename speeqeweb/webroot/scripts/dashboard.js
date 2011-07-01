@@ -16,7 +16,7 @@ Speeqe.dashBoardInit = function() {
     var dashboard_html = "<div id=\"dashboard\"> \
                         <div id=\"left-control\" class=\"control item\"> \
                                 <ul> \
-                                        <li><a href=\"http://"+Speeqe.HTTP_DOMAIN+"\" target=\"_blank\" ><img src=\"/images/dashboard/logo.png\" alt=\"Speeqe Logo\" width=\"30\" height=\"27\" /></a></li> \
+                                        <li><a href=\"http://"+Speeqe.HTTP_DOMAIN+"\" target=\"_blank\" ><img src=\"/images/dashboard/logo.png\" alt=\"Logo\" width=\"30\" height=\"27\" /></a></li> \
                                         <li class=\"button\"> \
                                                 <p><span id=\"dashboard_user\">Offline</span> <span id=\"dashboard_available\">is available</span></p> \
                                                 <ul> \
@@ -32,16 +32,10 @@ Speeqe.dashBoardInit = function() {
                         <div id=\"right-control\" class=\"control item\"> \
                                 <ul> \
                                         <li class=\"button\"> \
-                                                <p id=\"help\" class=\"menu-item\"><span>Help</span></p> \
-                                                <ul> \
-                                                    <li id='show_help_dialog'><span>Help?</span></li> \
-                                                </ul> \
+                                                <p id='show_help_dialog' class=\"menu-item\"><span>Help</span></p> \
                                         </li> \
                                         <li class=\"button\"> \
-                                                <p id=\"settings\" class=\"menu-item\"><span>Settings</span></p> \
-                                                <ul> \
-                                                    <li id='configure_chat'><span>Configure Room</span></li> \
-                                                </ul> \
+                                                <p id='configure_chat' class=\"menu-item\"><span>Settings</span></p> \
                                         </li> \
                                 </ul> \
                         </div> \

@@ -92,8 +92,8 @@
 /* Right Control Items 
 -------------------------------------------------- */
 
-#right-control p#help 			{ background: url('/images/dashboard/help.png') center no-repeat #393939; }
-#right-control p#settings 		{ background: url('/images/dashboard/settings.png') center no-repeat #393939; }
+#right-control p#show_help_dialog 			{ background: url('/images/dashboard/help.png') center no-repeat #393939; }
+#right-control p#configure_chat 		{ background: url('/images/dashboard/settings.png') center no-repeat #393939; }
 #right-control ul li.clicked p 	{ background: url('/images/dashboard/close.png') center no-repeat #393939 !important; }
 
 #right-control ul li
