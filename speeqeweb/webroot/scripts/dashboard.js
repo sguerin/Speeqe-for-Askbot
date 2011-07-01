@@ -35,14 +35,13 @@ Speeqe.dashBoardInit = function() {
                                         <li class=\"button\"> \
                                                 <p id=\"help\" class=\"menu-item\"><span>Help</span></p> \
                                                 <ul> \
-                                                                                 <li id='show_help_dialog'><span>Help?</span></li> \
+                                                    <li id='show_help_dialog'><span>Help?</span></li> \
                                                 </ul> \
                                         </li> \
                                         <li class=\"button\"> \
                                                 <p id=\"settings\" class=\"menu-item\"><span>Settings</span></p> \
                                                 <ul> \
-                                                        <li id='configure_chat'><span>Configure Room</span></li> \
-                                                        <li id='show_joinleave'><span>Toggle join/leave messages.</span></li> \
+                                                    <li id='configure_chat'><span>Configure Room</span></li> \
                                                 </ul> \
                                         </li> \
                                 </ul> \
