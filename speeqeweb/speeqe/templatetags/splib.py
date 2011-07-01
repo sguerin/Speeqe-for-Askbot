@@ -27,35 +27,6 @@ class ActiveRoomsNode(Node):
 def show_rooms(parser,token):
     return ActiveRoomsNode()
 
-class Room:
-    pass
-class FeaturedRoomsNode(Node):
-
-    def __init__(self):
-        """do I need this?"""
-        pass
-
-    def render(self, context):
-        try:
-            featured_rooms = []
-            for key in settings.FEATURED_ROOMS.keys():
-                room = Room()
-                room.name = key
-                room.url = settings.FEATURED_ROOMS[key]
-                featured_rooms.append(room)
-            context['featuredrooms'] = featured_rooms
-        except:
-            pass
-        return ''
-@register.tag(name="show_featured_rooms")
-def show_featured_rooms(parser,token):
-    return FeaturedRoomsNode()
-
-@register.simple_tag
-def help_email():
-    return settings.HELP_EMAIL
-
-
 class DnsRoomNamesNode(Node):
     """ return setting that the dns trick for room names is being used """
     def render(self, context):
