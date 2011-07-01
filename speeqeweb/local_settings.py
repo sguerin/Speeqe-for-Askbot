@@ -13,15 +13,10 @@ EXACT_BAD_WORDS = ['crap']
 #be rejected.
 MATCH_BAD_WORDS = ['crap'] 
 
-
-#SESSION_COOKIE_DOMAIN = ".murex.com"
-
-
-
 #where all your media , intended to be served via django, lives
-MEDIA_ROOT = '/var/www/speeqeweb/webroot'
+MEDIA_ROOT = '/var/www/speeqe/speeqeweb/webroot'
 #where all your static documents are.
-DOCUMENT_ROOT = '/var/www/speeqeweb/webroot'
+DOCUMENT_ROOT = '/var/www/speeqe/speeqeweb/webroot'
 
 #the user used to list active rooms on the website. the speeqe website
 #needs a user and password to connect and run disco requests. This is
@@ -38,10 +33,11 @@ BOSH_PORT = "7070"
 #the url used to proxy to your bosh server
 BOSH_URL = "/http-bind"
 
-#multi user chat rooms listed on the front page.  This list contains
-#the rooms that will be displayed on the speeqe web pages. The first
+#multi user chat rooms listed in first on the front page.
+#The rooms must exist in teh server to be displayed.
 #entry is the title, followed by the room url.  You can use /room/ or
 #the dns trick if you have that setup.
+#since the room must exist, the room url is not used anymore.
 FEATURED_ROOMS =  {'ore':'/room/ore/', 'mad':'/room/mad/', }
 
 #where all your django templates live.  make sure to have the location
@@ -49,7 +45,6 @@ FEATURED_ROOMS =  {'ore':'/room/ore/', 'mad':'/room/mad/', }
 #option
 TEMPLATE_DIRS = (
     '/var/www/speeqe/speeqeweb/templates',
-    '/lib/python/speeqeweb/templates',    
     '/var/www/speeqe/speeqeweb/webroot',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
