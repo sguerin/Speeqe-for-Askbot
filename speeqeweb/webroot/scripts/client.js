@@ -278,66 +278,6 @@ var Speeqe = {
 
 		    return false;
 		});
-
-		$("#changeuser").click(function() {
-		    var new_url = "http://"+Speeqe.HTTP_DOMAIN+"/accounts/login/";
-		    if (app._chatroom)
-			{
-			    new_url_array = ["?next=http://",
-					     app._chatroom.split("@")[0],
-					     ".",
-					     Speeqe.HTTP_DOMAIN
-			    ];
-			    new_url += new_url_array.join("");
-			}
-		    window.location = new_url;
-		    return false;
-		});
-		//Add a login floating dialog (use for preferences in
-		//the future)
-		$('#layer1').draggable({
-			 	        zIndex: 	20,
-					opacity: 	0.7,
-				        handle:	        '#layer1_handle'
-							    });
-		$('#layer1_form').ajaxForm({
-	                        target: '#form_message',
-				dataType: 'xml',
-				success: function(responseXML) 
-				{
-				        var error = $('login',responseXML).attr("msg");
-					$("#layer1_form_submit").get(0).disabled = false;
-
-					if (error.length != 0)
-					{
-					    $("#form_message").empty();
-					    $("#form_message").append("Error: ");
-					    $("#form_message").append(error);					
-					}
-					else
-					{
-					    $("#form_message").empty();
-					    $("#form_message").append("Logged in.");
-					    $("#layer1").hide();
-					    window.location.reload();
-					}
-
-					
-				},
-				error: function(req,error)
-				{
-				    $("#form_message").empty();
-				    $("#form_message").append("Error logging in. ");
-				    $("#layer1_form_submit").get(0).disabled = false;
-				},
-				beforeSubmit: function() {
-				    $("#layer1_form_submit").get(0).disabled = true;
-				    $("#form_message").empty();
-				    $("#form_message").append("Logging in...");
-				}		  
-		});
-	
-		$("#layer1").hide();
 						
 		$('.preferences, #changeuser_prefs').click(function() {
 		    //set css top and left before displaying

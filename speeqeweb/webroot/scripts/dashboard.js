@@ -22,7 +22,6 @@ Speeqe.dashBoardInit = function() {
                                                 <ul> \
                                                         <li id=\"dashboard_signoff\" style=\"display:none;\" ></span>Sign Off</span></li> \
                                                         <li id=\"dashboard_signon\"><span>Sign On</span></li> \
-                                                        <li id='changeuser_prefs'><span>Change User</span></li> \
                                                 </ul> \
                                         </li> \
                                 </ul> \

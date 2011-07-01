@@ -234,7 +234,7 @@
           border: none;
       }
 
-      #layer1, #js_error, #configure_room_form,#room_password_dialog {
+      #js_error, #configure_room_form,#room_password_dialog {
         position: absolute;
         left: 200px;
         top: 100px;
@@ -248,7 +248,7 @@
       #configure_room_form {
         width: 380px;
       }
-      #layer1_handle, #configure_room_form_handle,#room_password_dialog_handle {
+      #configure_room_form_handle,#room_password_dialog_handle {
         background-color: #5588bb;
         padding: 2px;
         text-align: center;
@@ -257,7 +257,7 @@
         vertical-align: middle;
       }
 
-      #layer1_content, #configure_room_form_content,#room_password_dialog_content {
+      #configure_room_form_content,#room_password_dialog_content {
         padding: 5px;
       }
 
@@ -305,29 +305,6 @@
   </head>
   <body>
       <noscript><div id="js_error">You must enable JavaScript to use speeqe.!</div></noscript>
-    <div id="layer1" style="display:none">
-      <div id="layer1_handle">
-        <a id="close" href="#">[ x ]</a>
-        Login As Another User
-      </div>
-      <div id="layer1_content">
-        <form id="layer1_form" action="/accounts/ajax_login/" method="post">
-          <div>
-            <div>
-              <div class="leftinput">Login:</div>
-              <input class="rightinput" name="username" type="text" />
-            </div>
-            <div>
-              <div class="leftinput">Password:</div>
-              <input class="rightinput" name="password" type="password" />
-            </div>
-          </div>
-          <input id="layer1_form_submit" type="submit" value="login" />
-        </form>
-        <div id='form_message' class='error'>
-        </div>
-      </div>
-    </div>
     <div id="configure_room_form" style="display:none;">
 	  <div id="configure_room_form_handle">
             <a id="configure_room_form_close" href="#">[ x ]</a>

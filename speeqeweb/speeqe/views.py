@@ -172,27 +172,6 @@ def create_django_session(request):
 	
 	auth.login(request, user)
 	
-
-def ajax_login(request):
-	"""Used to login via ajax."""
-	
-	username = request.POST.get('username',None)
-	response_string = "<login msg=''>invalid</login>"
-	valid = False
-	try:
-		if username:
-			#errors = xmpp_auth(request)
-			if not errors:
-				create_django_session(request)
-				valid = True
-			else:
-				response_string="<login msg=\""+str(errors.values()[0][0])+"\">invalid</login>"
-	except Exception,ex:
-		response_string = "<login msg=\"Error:"+str(ex)+"\">invalid</login>"
-	if valid:
-		response_string = "<login msg=''>valid</login>"
-	return HttpResponse(response_string,mimetype="text/xml")
-	
 def login(request):
 	
 	redirect_to = request.REQUEST.get('next', '/')

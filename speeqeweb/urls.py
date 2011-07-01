@@ -12,7 +12,6 @@ urlpatterns = patterns('',
     (r'^client/room/(?P<room_name>[\w|\@|\.|\_|:|\+|&|\-|%|#]+)/','speeqeweb.speeqe.views.client'),
     (r'^client/','speeqeweb.speeqe.views.client'),
     (r'^accounts/login/$', 'speeqeweb.speeqe.views.login'),
-    (r'^accounts/ajax_login/$', 'speeqeweb.speeqe.views.ajax_login'),
     (r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
     # Uncomment this for admin:
     (r'^admin/', include('django.contrib.admin.urls')),
