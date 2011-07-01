@@ -57,18 +57,3 @@ class Theme(models.Model):
 	owner = models.ForeignKey(User)
 	#name of theme
 	name = models.CharField(max_length=255)
-
-
-class EmailMessageTemplate(models.Model):
-
-	name = models.CharField(max_length=255)
-	template = models.TextField()
-
-
-class EmailConfirmation(models.Model):
-
-	code = models.CharField(max_length=255)
-	confirmed = models.BooleanField(default=False)
-	email = models.CharField(max_length=255)
-
-	

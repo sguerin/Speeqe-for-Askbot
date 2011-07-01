@@ -3,7 +3,7 @@
 # See LICENSE.txt for details
 #
 
-from speeqeweb.speeqe.models import Theme,EmailMessageTemplate,EmailConfirmation
+from speeqeweb.speeqe.models import Theme
 from speeqeweb.speeqe.forms import RegisterForm, ThemeForm
 import speeqeweb.speeqe.forms
 from speeqeweb.helpers import render_response, generate_code
@@ -424,24 +424,3 @@ def link_theme_to_room(request):
 	else:
 		retval += "<themelink>invalid</themelink>"
 	return HttpResponse(retval,mimetype="text/xml")
-
-
-
-def confirm_email(request):
-	"""Confirm a users email with the generated code."""
-	context = {}
-	code = request.GET.get('url')
-	try:
-		email_confirmation = EmailConfirmation.objects.get(code=code)
-		email_confirmation.confirmed=True
-		email_confirmation.save()
-		context['message'] = "Email confirmed."
-	except EmailConfirmation.DoesNotExist:
-		context['message'] = "Unknown code."
-		       
-	
-
-	return render_response(request,
-			       'confirmemail.html',
-			       context)
-
