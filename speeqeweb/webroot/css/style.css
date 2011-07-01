@@ -229,9 +229,6 @@ input {
     padding:28px 0px 0px 0px;
     font-size:1.6em;
 }
-#signup1 ul{padding:13px 13px 13px 2px;margin:0px;list-style:none;}
-#signup1 ul li{font-size:1.1em;padding:3px 0px 4px 16px;
-background:url("/images/bullet.png") no-repeat;}
 
 #signup2{
     width:500px;
