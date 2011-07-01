@@ -45,15 +45,3 @@ class Member(models.Model):
 		u.set_password(self.password)
 		u.last_login = datetime.datetime.utcnow()		
 		u.save()
-		
-		
-
-class Theme(models.Model):
-	"""Model to store user's themes. """
-
-	#html code of theme
-	content = models.TextField()
-	#theme creator/owner
-	owner = models.ForeignKey(User)
-	#name of theme
-	name = models.CharField(max_length=255)

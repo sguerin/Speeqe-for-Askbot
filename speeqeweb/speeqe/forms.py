@@ -55,15 +55,6 @@ class RegisterForm(forms.Form):
         username = self.cleaned_data['username'].strip()
         return validate_username(username)
 
-class ThemeForm(forms.Form):
-    """Used to edit a user's theme."""
-
-    content = forms.CharField(label="html",
-                              max_length=100000,
-                              widget=forms.Textarea)
-    
-    name = forms.CharField(label="Name",max_length=200,required=True)
-
 def validate_email(email):
     try:
         existing = Member.objects.get(email=email)

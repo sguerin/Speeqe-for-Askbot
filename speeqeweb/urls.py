@@ -16,10 +16,6 @@ urlpatterns = patterns('',
     (r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
     (r'^messagesearch/(?P<room>[\w|\@|\.|\_|:|\+|&|\-|%|#]+)/', 'speeqeweb.speeqe.views.room_message_search'),   
     (r'^messagesearch/$', 'speeqeweb.speeqe.views.room_message_search'),
-    (r'^themes/new/$', 'speeqeweb.speeqe.views.new_theme'),
-    (r'^themes/edit/(?P<theme_id>\d+)/', 'speeqeweb.speeqe.views.edit_theme'),
-    (r'^themes/link/', 'speeqeweb.speeqe.views.link_theme_to_room'),
-    (r'^themes/$', 'speeqeweb.speeqe.views.list_themes'),
     # Uncomment this for admin:
     (r'^admin/', include('django.contrib.admin.urls')),
 

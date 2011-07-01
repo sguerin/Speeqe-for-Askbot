@@ -3,8 +3,7 @@
 # See LICENSE.txt for details
 #
 
-from speeqeweb.speeqe.models import Theme
-from speeqeweb.speeqe.forms import RegisterForm, ThemeForm
+from speeqeweb.speeqe.forms import RegisterForm
 import speeqeweb.speeqe.forms
 from speeqeweb.helpers import render_response, generate_code
 from speeqeweb.httpbclient import PunjabClient
@@ -235,7 +234,7 @@ def login(request):
 					      'next': redirect_to})
 	return ret_response
 
-def client(request,room_name=None,virtual_name=None,theme_name=None):
+def client(request,room_name=None,virtual_name=None):
 	"""Start up the chat client with the requested room """        
 	room = room_name
 	if not room:
@@ -244,19 +243,7 @@ def client(request,room_name=None,virtual_name=None,theme_name=None):
         if virtual_name:
                 room = virtual_name.replace("."+settings.HTTP_DOMAIN,"")
 
-	if not theme_name:
-		theme = request.GET.get('theme',room)
-	else:
-		theme = request.GET.get('theme',theme_name)
-
-
-	#detect iphone and force use of iphone theme
-	user_agent = request.META.get('HTTP_USER_AGENT','')
-	if (user_agent.lower().find("ipod") != -1) or \
-	       (user_agent.lower().find("iphone") != -1):
-		theme = "iphone"
-	
-	userpassword = None
+        userpassword = None
 	pcjid = None
 	pcresource = None
 	fullusername = request.user.username
@@ -272,11 +259,6 @@ def client(request,room_name=None,virtual_name=None,theme_name=None):
 			resp['Expires'] = datetime.datetime.now().strftime('%a, %d %b %Y %T GMT')
 			return resp
 	room_theme = "client.html"
-	try:
-	
-		room_theme = get_template("themes/"+theme+"_client.html")
-	except:
-		room_theme = get_template("client.html")
 	
 	return render_response(request,
 			       'autologinclient.html',
@@ -286,7 +268,7 @@ def client(request,room_name=None,virtual_name=None,theme_name=None):
 				'pcresource':pcresource,
 				'ip_address': ip_address,
 				'room':room,
-				'theme':theme,
+				'theme':'room',
 				'room_theme':room_theme})
 
 
@@ -312,115 +294,3 @@ def room_message_search(request,room=None):
 	return render_response(request,
 			       'messagesearch.html',
 			       {'room':room})
-
-@login_required
-def list_themes(request):
-	"""List a user's themes. """
-
-
-	themes = Theme.objects.filter(owner=request.user)
-	
-	return render_response(request,
-			       'listthemes.html',
-			       {'themes':themes})
-
-@login_required
-def new_theme(request):
-	"""Create a new theme, using the client.html template as the default. """
-	context = {}
-	theme_form = None
-	if request.method == "POST":
-		#Validate and save the theme
-		theme_form = ThemeForm(request.POST)
-		if theme_form.is_valid():
-			name = theme_form.cleaned_data['name']
-			content = theme_form.cleaned_data['content']
-			owner = request.user
-			theme = Theme(name=name,
-				      content=content,
-				      owner=owner)
-			theme.save()
-			#Return edit theme template on successful
-			#theme creation
-			context['message'] = "Successfully Created Theme."
-			context['form'] = theme_form
-			
-			return_response = render_response(request,
-							  'edittheme.html',
-							  context)
-		else:
-			context['form'] = theme_form
-			return_response = render_response(request,
-							  'newtheme.html',
-							  context)   
-		
-	else:
-		#set initial context as client.html
-		rendered = render_to_string('client.html', {})
-		theme_form = ThemeForm(initial={'content':rendered})
-		context['form'] = theme_form
-		return_response = render_response(request,
-						  'newtheme.html',
-						  context)
-	return return_response
-
-@login_required
-def edit_theme(request,theme_id=None):
-	
-	context = {}
-	theme = get_object_or_404(Theme,id=theme_id)
-	if request.method == "POST":
-		#Validate and save the theme
-		theme_form = ThemeForm(request.POST)
-		if theme_form.is_valid():			
-			theme.name=theme_form.cleaned_data['name']
-			theme.content=theme_form.cleaned_data['content']
-			theme.owner=request.user
-			theme.save()
-
-		context['form'] = theme_form
-	else:
-		theme_form = ThemeForm({'name':theme.name,
-				       'content':theme.content})
-		context['form'] = theme_form
-		
-	return render_response(request,
-			       'edittheme.html',
-			       context)
-
-@login_required
-def link_theme_to_room(request):
-	"""Link a theme to a room that is owned by the user. """
-	retval = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>"
-	
-	if request.method == "POST":
-		theme_id = request.POST.get('theme',None)
-		room = request.POST.get('room',None)
-		user = request.user.username
-
-		#test if user is room owner
-		try:
-			password = request.session.get('user_password',None)
-			username = request.user.username
-			if not xmpp.check_room_owner(username=username,
-						     password=password,
-						     room=room):
-			        #return error that user is not room owner
-				retval += "<themelink msg='not room owner'>invalid</themelink>"
-			else:
-			        #copy theme content to room template
-
-				users_theme = Theme.objects.get(id=int(theme_id),
-								owner=request.user)
-				file_content = users_theme.content
-				
-				f = open(settings.THEME_ROOT+"/"+room+"_client.html",'w')
-				f.write(file_content)
-				f.close()
-				retval += "<themelink>success</themelink>"
-		
-		except Exception, ex:
-			retval += "<themelink msg=\""+str(ex)+"\">invalid</themelink>"
-	else:
-		retval += "<themelink>invalid</themelink>"
-	return HttpResponse(retval,mimetype="text/xml")
