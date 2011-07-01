@@ -6,7 +6,7 @@
 from speeqeweb.speeqe.models import Theme,EmailMessageTemplate,EmailConfirmation
 from speeqeweb.speeqe.forms import RegisterForm, ThemeForm
 import speeqeweb.speeqe.forms
-from speeqeweb.helpers import send_email, render_response, generate_code
+from speeqeweb.helpers import render_response, generate_code
 from speeqeweb.httpbclient import PunjabClient
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect

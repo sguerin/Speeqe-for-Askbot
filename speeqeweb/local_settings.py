@@ -16,13 +16,7 @@ MATCH_BAD_WORDS = ['crap']
 
 #SESSION_COOKIE_DOMAIN = ".murex.com"
 
-#type of database you want to use for django
-DATABASE_ENGINE = 'mysql'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'ado_mssql'.
-DATABASE_NAME = 'speeqe'             # Or path to database file if using sqlite3.
-DATABASE_USER = 'speeqe'             # Not used with sqlite3.
-DATABASE_PASSWORD = ''         # Not used with sqlite3.
-DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
-DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
+
 
 #where all your media , intended to be served via django, lives
 MEDIA_ROOT = '/var/www/speeqeweb/webroot'
@@ -61,15 +55,6 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
-
-#mail server used to send email
-SMTP_SERVER = 'smtp.tribe.com'
-#username and password if using smtp auth
-SMTP_USERNAME = ''
-SMTP_PASSWORD = ''
-SMTP_PORT = 2525
-#email used when someone clicks on a help email link
-HELP_EMAIL = 'admin@tribe.com'
 
 #default sha1 for your default avatar image
 AVATAR_DEFAULT_SHA1 = 'f2f8ab835b10d66f9233518d1047f3014b3857cf'
