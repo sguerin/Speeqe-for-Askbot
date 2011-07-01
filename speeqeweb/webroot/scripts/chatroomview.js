@@ -11,8 +11,7 @@ Speeqe.ChatRoomView.prototype = {
       Updates chat room information to html elements.
     
       This view displays the chatroom name and server to #roomname and
-      #roomnamedomain. It displays the user's status in #login, creates
-      the room search url, and displays the user name and user's
+      #roomnamedomain. It displays the user's status in #login and displays the user name and user's
       domain to #login_username and #login_userdomain.
      */
     show: function(roomname,nick) {
@@ -45,18 +44,6 @@ Speeqe.ChatRoomView.prototype = {
 	$("#dashboard_user").empty();	
 	$("#dashboard_user").append(nick);	
 	$("#login").append("<br />Welcome "+nick.replace("@"+Speeqe.XMPP_DOMAIN,"")+".");
-	room_search_url = ["http://",
-			   Speeqe.XMPP_DOMAIN,
-			   "/messagesearch/?room=",
-			   roomdomain[0]];
-	
-
-	room_search_html = ["<a href=\"",
-			    room_search_url.join(""),
-			    "\">Search Room</a>"			    
-	];
-	$("#roomsearch").empty();
-	$("#roomsearch").append(room_search_html.join(""));
 
 	document.title = roomname;
 	

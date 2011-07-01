@@ -201,9 +201,6 @@ var Speeqe = {
 		});
 		Speeqe.helpDialogInit();
 		
-		$("#search_room").click(function() {
-		    window.open('http://'+Speeqe.HTTP_DOMAIN+'/messagesearch/'+app.getChatroom()+'/');
-		});
 		/*
 		  Start the XMPP Client with the given username and password.
 		*/

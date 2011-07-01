@@ -279,18 +279,3 @@ def random_resource():
 	for i in range(5):
 		retval += random.choice(string.letters)
 	return retval
-
-def room_message_search(request,room=None):
-	"""Search rooms for chat history. """
-	if not room:
-		room = request.GET.get('room',None)
-	user = request.GET.get('user',None)
-	q = request.GET.get('q',None)
-	message_type = request.GET.get('message_type',3)
-	start_date = request.GET.get('start_date',None)
-	end_date = request.GET.get('end_date',None)
-	
-	
-	return render_response(request,
-			       'messagesearch.html',
-			       {'room':room})

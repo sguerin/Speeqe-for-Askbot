@@ -305,7 +305,7 @@ a,a:hover,a:visited{color:#B02B2C;text-decoration:none;}
 .button,a.button:hover,a.button:visited{color:white;}
 img.user-image{max-height:200px;max-width:200px;overflow:hidden;}
 
-#searchbox,#room-search #filter{border:1px solid #a0a0a0;height:20px;font-size:14px;}
+#filter{border:1px solid #a0a0a0;height:20px;font-size:14px;}
 
 .pager-container{min-height:22px;}
 .pager{margin:10px 1%;}
