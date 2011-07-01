@@ -73,7 +73,7 @@ Speeqe.RosterItemView.prototype =  {
         else
         {
             online_avatar.attr("src",
-                               '/avatar-service/lookup/?sha1=f2f8ab835b10d66f9233518d1047f3014b3857cf');
+                               '/images/defaultavatar.png');
             online_avatar.attr("id",'onlineavatar'+roster_item.id);
             online_avatar.attr("alt",displaynick);
             online_avatar.error(function () {
@@ -219,7 +219,7 @@ Speeqe.RosterItemView.prototype =  {
         var cleannick = Strophe.unescapeNode(nick);
         if (chatwindow.hasClass('joinleave'))
         {
-            var room_avatar = '/avatar-service/lookup/?sha1=f2f8ab835b10d66f9233518d1047f3014b3857cf';
+            var room_avatar = '/images/murex/defaultavatar.png';
             var join_message_ar = ["<message from='",
                                    cleannick,
                                    "' to='4@dev.speeqe.com/3' id='1' type='groupchat'><x xmlns='jabber:x:event'><composing/></x><body>/me has ",

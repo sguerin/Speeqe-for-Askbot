@@ -51,15 +51,6 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
-#default sha1 for your default avatar image
-AVATAR_DEFAULT_SHA1 = 'f2f8ab835b10d66f9233518d1047f3014b3857cf'
-#default avatar sha1 when an IE6 user comes to the website
-AVATAR_DEFAULT_IE6 = 'b04b0e215af8ce2b7d620aaef32492c8bfc06ed5'
-#change the size of the images returned. first is height, followed by width.
-AVATAR_DEFAULT_DIMENSIONS = '30|30'
-#the amount of time the image is cached
-AVATAR_CACHE_TIMEOUT = 6000
-
 #allows django to serve all unknown urls as static data
 SERVE_STATIC_URLS = True
 #tells speeqe that you have the dns trick configured. (ie. you can use

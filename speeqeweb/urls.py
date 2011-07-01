@@ -3,7 +3,6 @@ from django.conf import settings
 
 
 urlpatterns = patterns('',
-    (r'^avatar-service/',   include('speeqeweb.avatars.urls')),
     (r'^join/validate/username/','speeqeweb.speeqe.views.validate_username'),
     (r'^join/validate/email/','speeqeweb.speeqe.views.validate_email'),
     (r'^join/','speeqeweb.speeqe.views.join'),
