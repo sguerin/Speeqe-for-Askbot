@@ -24,15 +24,15 @@ class ChatRoom:
         self.description = description
         self.occupants = occupants
         self.creationdate = creationdate
-		self.isFeatured == False
+        self.isFeatured = False
     def __repr__(self):
         return repr((self.name, self.description, self.occupants, self.creationdate))
     def is_featured(self):
-		return self.isFeatured
+        return self.isFeatured
 
 class RoomQuery:
     def __init__(self):
-        self.name = []
+        self.rooms = []
         self._ns = 'http://jabber.org/protocol/disco#items'
         
     def xmpp_result(self,func,response):    
@@ -44,7 +44,6 @@ class RoomQuery:
                 room_jid = node.getAttr('jid')
                 #room_name = room_jid.split('@')[0]
                 room_name = node.getAttr('name')
-                #self.rooms.append(room_name)
                 # query details of each room
                 jid=xmpp.protocol.JID(node=speeqeweb.settings.XMPP_USER,domain=speeqeweb.settings.XMPP_DOMAIN,resource='/listrooms')
                 client = xmpp.Client(jid.getDomain(),debug=[])
@@ -54,7 +53,7 @@ class RoomQuery:
                         iq = xmpp.protocol.Iq(typ='get',
                                               to=room_jid,)
                         query = iq.setTag("query",namespace=self._ns)
-                        responsedetail = client.SendAndWaitForResponse(iq)						
+                        responsedetail = client.SendAndWaitForResponse(iq)
                         if responsedetail.getType() == 'result':
                             for node_x in responsedetail.getQueryPayload():
                                 if node_x.getName() == 'x':
@@ -70,23 +69,25 @@ class RoomQuery:
                                                 room_creationdate = node_value.getData()
                                                 room_creationday,room_creationhour = room_creationdate.split("T")
                                                 room_creationdate = room_creationday + ' ' + room_creationhour
-						client.disconnect()
-						room = ChatRoom(name = room_name,
-                                        description = room_desc,
-                                        occupants = room_occupants,
-                                        creationdate = room_creationdate)
-                        for key in speeqeweb.settings.FEATURED_ROOM
+                        client.disconnect()
+                        room = ChatRoom(name = room_name,
+                                               description = room_desc,
+                                               occupants = room_occupants,
+                                               creationdate = room_creationdate)
+                        for key in speeqeweb.settings.FEATURED_ROOMS.keys():
                             if room.name == key :
                                 room.isFeatured == True
                                 setattr(room, 'isFeatured', True)
                                 break
                         if room.isFeatured == True :
-                            featured_rooms.append(room)			
+                            featured_rooms.append(room)
+                        else:
+                            self.rooms.append(room)
                     else:
                         print "Unable to authenticate via xmpp."
                 else:
                     print "Unable to connect via xmpp."
-            #sorted(self.rooms,key=attrgetter('occupants'), reverse=True)
+            sorted(self.rooms,key=attrgetter('occupants'), reverse=True)
             #print self.rooms
             self.rooms =  featured_rooms + self.rooms
     def queryRooms(self):
