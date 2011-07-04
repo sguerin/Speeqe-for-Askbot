@@ -37,6 +37,7 @@
 
 </script>
 {% block head %}{% endblock %}
+
 </head>
 <body class="mob">
     <div id="container">
@@ -59,13 +60,6 @@
                     {% endif %} 
 				</form>
 			</div>
-			{% if user.is_authenticated %}
-				<div><br><a id="login" class="button" href="/accounts/logout/">logout</a></div>
-			{% else %}
-				<div><br><a id="login" class="button" href="http://{% current_domain %}/accounts/login/?next=http://{% current_domain %}/">log in</a></div>		
-			{% endif %}
-			{% block content %}
-			{% endblock %}
             </br>
 			{% show_rooms %}
 			{% for room in rooms %}

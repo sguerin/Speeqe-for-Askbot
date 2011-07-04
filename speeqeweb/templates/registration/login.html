@@ -1,19 +1,13 @@
-{% extends "base.html" %}
 {% load splib %}
-{% block head %}
-{{ block.super }}
+
 <style>
 #loginform {
    margin:auto;
 }
 </style>
 
-{% endblock %}
-{% block title %}
-Login
-{% endblock %}
+<title>Login</title>
 
-{% block content %}
 <div>
 <p>Login with an existing account or create an account. </p>
 
@@ -46,4 +40,3 @@ Login
       <a {% if next %}href="/join/?next={{next}}"{% else %}href="/join/"{% endif %}>Don't have an account?</a>
     </p>
   </div>
-{% endblock %}

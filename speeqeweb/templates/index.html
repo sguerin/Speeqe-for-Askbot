@@ -1,1 +1,10 @@
 {% extends "base.html" %}
+{% load splib %}
+{% block head %}
+	{% if user.is_authenticated %}
+		<div><a id="login" class="button" href="/accounts/logout/">logout</a></div>
+	{% else %}
+		<div><a id="login" class="button" href="http://{% current_domain %}/accounts/login/?next=http://{% current_domain %}/">log in</a></div>		
+	{% endif %}
+	</br>
+{% endblock %}
