@@ -91,7 +91,7 @@
 <div class="leftcol"><div id="validusername" >&nbsp;&nbsp;&nbsp;&nbsp;</div><label>Username:</label></div>
 <input id='username' name='username' value="pick your name" />
 <span>
-@{% current_domain %}
+@{% xmpp_domain %}
 </span>
 <p class='error' id="usernameerror">
 {% if form.errors.username %}

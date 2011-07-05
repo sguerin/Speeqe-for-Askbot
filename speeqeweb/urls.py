@@ -3,15 +3,18 @@ from django.conf import settings
 
 
 urlpatterns = patterns('',
+    # comment if login method is askbot
     (r'^join/validate/username/','speeqeweb.speeqe.views.validate_username'),
     (r'^join/validate/email/','speeqeweb.speeqe.views.validate_email'),
     (r'^join/','speeqeweb.speeqe.views.join'),
+    (r'^accounts/login/$', 'speeqeweb.speeqe.views.login'),
+    (r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
+
+    # needed
     (r'^virtualhost/(?P<virtual_name>[\w|\@|\_|:|\+|&|\-|#|\.]+)/','speeqeweb.speeqe.views.client'),
     (r'^room/(?P<room_name>[\w|\@|\.|\_|:|\+|&|\-|%|#]+)/','speeqeweb.speeqe.views.client'),
     (r'^client/room/(?P<room_name>[\w|\@|\.|\_|:|\+|&|\-|%|#]+)/','speeqeweb.speeqe.views.client'),
     (r'^client/','speeqeweb.speeqe.views.client'),
-    (r'^accounts/login/$', 'speeqeweb.speeqe.views.login'),
-    (r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
     # Uncomment this for admin:
     (r'^admin/', include('django.contrib.admin.urls')),
 

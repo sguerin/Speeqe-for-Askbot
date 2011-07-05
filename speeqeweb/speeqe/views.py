@@ -77,12 +77,12 @@ def join(request):
 		context={'form':register_form}
 		if register_form.is_valid():
 			#create the account
-			new_member = register_form.save()
-
-			username = new_member.username + "@" + new_member.realm
-			user = auth.authenticate(username=username,
-						 password=new_member.password)
-			request.session['user_password']= register_form.cleaned_data['password']
+			new_user = register_form.save()
+			#authenticate the user
+			user_password = register_form.cleaned_data['password']
+			user = auth.authenticate(username=new_user.username,
+                                     password=user_password)
+			request.session['user_password']= user_password
 			if user is not None:
 				auth.login(request,user)
 

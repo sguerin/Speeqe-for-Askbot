@@ -5,9 +5,10 @@
 
 
 from django import forms
-from speeqeweb.speeqe.models import Member
 from speeqeweb.settings import HTTP_DOMAIN,XMPP_DOMAIN,EXACT_BAD_WORDS,MATCH_BAD_WORDS
 from django.conf import settings
+from django.contrib.auth.models import User
+import datetime
 
 #error strings used when throwing form validation exceptions. An
 #exception class might be overkill?
@@ -34,17 +35,32 @@ class RegisterForm(forms.Form):
 
     def save(self):
         username,realm = self.cleaned_data['username'].split("@")
-        fullusername = self.cleaned_data['username'].strip()
+        username = self.cleaned_data['username'].strip()
+        password = self.cleaned_data['password']
+        email = self.cleaned_data['email']
         try:
-            mem = Member(username=username,
-                         realm=realm,
-                         password=self.cleaned_data['password'])
+            new_user = None
 
-            mem.save()
+            try:
+                new_user = User.objects.get(username=username)
+            except User.DoesNotExist:
+                pass
+
+            if not new_user:
+                new_user = User.objects.create_user(username,
+                                 email,
+                                 username)
+                new_user.save()
+
+            new_user.username = username
+            new_user.email = email
+            new_user.set_password(password)
+            new_user.last_login = datetime.datetime.utcnow()		
+            new_user.save()
         except Exception, ex:
             raise forms.ValidationError(error_strings['existing']+str(ex))
 
-        return mem
+        return new_user
     
     def clean_email(self):
         email = self.cleaned_data['email'].strip()
@@ -57,11 +73,11 @@ class RegisterForm(forms.Form):
 
 def validate_email(email):
     try:
-        existing = Member.objects.get(email=email)
+        existing = User.objects.get(email=email)
         if existing is not None:
             raise forms.ValidationError(error_strings['existing_email'])
             
-    except Member.DoesNotExist:
+    except User.DoesNotExist:
         pass
 
     if email.find(HTTP_DOMAIN) != -1:
@@ -99,7 +115,7 @@ def validate_username(username):
         raise forms.ValidationError("Spaces are not allowed in usernames.")
 
 
-    if Member.objects.filter(username__iexact=username).count() > 0:
+    if User.objects.filter(username__iexact=username).count() > 0:
         raise forms.ValidationError("Username is already in use.")
 
     if username.count("@") > 0:
