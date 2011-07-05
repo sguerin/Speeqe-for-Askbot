@@ -73,7 +73,11 @@
                             {% if room.is_featured %}
                                 <img class="small-site-logo" title="Support team" src="/images/murex/fireman.png" height="16" width="16">
                             {% endif %}
-							<span class="room-name"><a href="http://{% current_domain %}/room/{{room.name}}/">{{room.name}}</a></span>
+							{% if user.is_authenticated %}
+							    <span class="room-name"><a target="_blank" href="http://{% current_domain %}/room/{{room.name}}/">{{room.name}}</a></span>
+							{% else %}
+								<span class="room-name"><a href="http://{% current_domain %}/accounts/login/?next=http://{% current_domain %}/room/{{room.name}}/">{{room.name}}</a></span>
+							{% endif %}
 						</h3>
 						<div class="room-description clear-both">{{room.description}}</div>
 					</div>
