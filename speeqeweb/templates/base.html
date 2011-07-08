@@ -53,7 +53,7 @@
 					{% if user.is_authenticated %}
 					    <input class="button" value="Go" target="_blank" type="submit">
 			        {% else %}
-                        <input class="button" value="Go" href="http://{% current_domain %}/accounts/signin/?next=http://{% current_domain %}/">
+                        <input class="button" value="Go" href="http://{% current_domain %}/account/signin/?next=http://{% current_domain %}/">
                     {% endif %}
 			        {% if dns_room_names %}
 						<label>.{% current_domain %}</label>
@@ -76,7 +76,7 @@
 							{% if user.is_authenticated %}
 							    <span class="room-name"><a target="_blank" href="http://{% current_domain %}/room/{{room.name}}/">{{room.name}}</a></span>
 							{% else %}
-								<span class="room-name"><a href="http://{% current_domain %}/accounts/signin/?next=http://{% current_domain %}/room/{{room.name}}/">{{room.name}}</a></span>
+								<span class="room-name"><a href="http://{% current_domain %}/account/signin/?next=http://{% current_domain %}/room/{{room.name}}/">{{room.name}}</a></span>
 							{% endif %}
 						</h3>
 						<div class="room-description clear-both">{{room.description}}</div>
@@ -90,7 +90,7 @@
                         {% if user.is_authenticated %}
 						<a href="http://{% current_domain %}/room/{{room.name}}/" target="_blank" class="button">join</a>
                         {% else %}
-                        <a href="http://{% current_domain %}/accounts/signin/?next=http://{% current_domain %}/room/{{room.name}}/" class="button">join</a>
+                        <a href="http://{% current_domain %}/account/signin/?next=http://{% current_domain %}/room/{{room.name}}/" class="button">join</a>
 						{% endif %}
 						<a href="http://..." class="button" onclick="return false">history</a>
 						<a href="http://..." class="button" onclick="return false">conversations</a>

@@ -7,8 +7,8 @@ urlpatterns = patterns('',
     (r'^join/validate/username/','speeqeweb.speeqe.views.validate_username'),
     (r'^join/validate/email/','speeqeweb.speeqe.views.validate_email'),
     (r'^join/','speeqeweb.speeqe.views.join'),
-    (r'^accounts/signin/$', 'speeqeweb.speeqe.views.login'),
-    (r'^accounts/signout/$', 'django.contrib.auth.views.logout'),
+    (r'^account/signin/$', 'speeqeweb.speeqe.views.login'),
+    (r'^account/signout/$', 'django.contrib.auth.views.logout'),
 
     # needed
     (r'^virtualhost/(?P<virtual_name>[\w|\@|\_|:|\+|&|\-|#|\.]+)/','speeqeweb.speeqe.views.client'),

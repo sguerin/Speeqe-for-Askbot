@@ -2,9 +2,9 @@
 {% load splib %}
 {% block head %}
 	{% if user.is_authenticated %}
-		<div><a id="login" class="button" href="/accounts/signout/">logout</a></div>
+		<div><a id="login" class="button" href="/account/signout/">logout</a></div>
 	{% else %}
-		<div><a id="login" class="button" href="http://{% current_domain %}/accounts/signin/?next=http://{% current_domain %}/">log in</a></div>		
+		<div><a id="login" class="button" href="http://{% current_domain %}/account/signin/?next=http://{% current_domain %}/">log in</a></div>		
 	{% endif %}
 	</br>
 {% endblock %}
