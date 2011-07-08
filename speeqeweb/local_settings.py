@@ -13,10 +13,9 @@ EXACT_BAD_WORDS = ['crap']
 #be rejected.
 MATCH_BAD_WORDS = ['crap'] 
 
-#where all your media , intended to be served via django, lives
-MEDIA_ROOT = '/var/www/speeqe/speeqeweb/webroot'
 #where all your static documents are.
 DOCUMENT_ROOT = '/var/www/speeqe/speeqeweb/webroot'
+#DOCUMENT_ROOT = '/usr/local/virtualenv/askbot/lib/python2.6/site-packages/askbot/deps/speeqeweb/webroot'
 
 #the user used to list active rooms on the website. the speeqe website
 #needs a user and password to connect and run disco requests. This is
@@ -46,6 +45,8 @@ FEATURED_ROOMS =  {'ore':'/room/ore/', 'mad':'/room/mad/', }
 TEMPLATE_DIRS = (
     '/var/www/speeqe/speeqeweb/templates',
     '/var/www/speeqe/speeqeweb/webroot',
+    '/usr/local/virtualenv/askbot/lib/python2.6/site-packages/askbot/deps/speeqeweb/webroot',
+    '/usr/local/virtualenv/askbot/lib/python2.6/site-packages/askbot/deps/speeqeweb/templates',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
