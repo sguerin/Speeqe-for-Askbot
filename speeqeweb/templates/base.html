@@ -27,7 +27,7 @@
                          ".",
                          "{% current_domain %}"];
               {% else %}
-	      new_loc = ["http://{% current_domain %}/room/",
+	      new_loc = ["http://{% current_domain %}/chat/room/",
                          $("#formroomname").attr("value"),"/"];
 	      {% endif %}		 
 	      window.location = new_loc.join("");
@@ -43,17 +43,17 @@
     <div id="container">
 		<div id="content">
 			<div>
-				<form id="joincreate" method="get" action="/client/" class="inline">
+				<form id="joincreate" method="get" action="/chat/client/" class="inline">
 			        {% if dns_room_names %}
                         <label>Join or Create a room @ http://</label>
                     {% else %}
-					    <label>Join or Create a room @ http://{% current_domain %}/room/</label>
+					    <label>Join or Create a room @ http://{% current_domain %}/chat/room/</label>
 			        {% endif %}
 					<input id="filter" name="room" value="room name" onclick="this.value='';" size="12" type="text">
 					{% if user.is_authenticated %}
 					    <input class="button" value="Go" target="_blank" type="submit">
 			        {% else %}
-                        <input class="button" value="Go" href="http://{% current_domain %}/account/signin/?next=http://{% current_domain %}/">
+                        <input class="button" value="Go" href="http://{% current_domain %}/account/signin/?next=http://{% current_domain %}/chat/">
                     {% endif %}
 			        {% if dns_room_names %}
 						<label>.{% current_domain %}</label>
@@ -74,9 +74,9 @@
                                 <img class="small-site-logo" title="Support team" src="/images/murex/fireman.png" height="16" width="16">
                             {% endif %}
 							{% if user.is_authenticated %}
-							    <span class="room-name"><a target="_blank" href="http://{% current_domain %}/room/{{room.name}}/">{{room.name}}</a></span>
+							    <span class="room-name"><a target="_blank" href="http://{% current_domain %}/chat/room/{{room.name}}/">{{room.name}}</a></span>
 							{% else %}
-								<span class="room-name"><a href="http://{% current_domain %}/account/signin/?next=http://{% current_domain %}/room/{{room.name}}/">{{room.name}}</a></span>
+								<span class="room-name"><a href="http://{% current_domain %}/account/signin/?next=http://{% current_domain %}/chat/room/{{room.name}}/">{{room.name}}</a></span>
 							{% endif %}
 						</h3>
 						<div class="room-description clear-both">{{room.description}}</div>
@@ -88,9 +88,9 @@
 					<div class="clear-both"></div>
 					<div class="actions">
                         {% if user.is_authenticated %}
-						<a href="http://{% current_domain %}/room/{{room.name}}/" target="_blank" class="button">join</a>
+						<a href="http://{% current_domain %}/chat/room/{{room.name}}/" target="_blank" class="button">join</a>
                         {% else %}
-                        <a href="http://{% current_domain %}/account/signin/?next=http://{% current_domain %}/room/{{room.name}}/" class="button">join</a>
+                        <a href="http://{% current_domain %}/account/signin/?next=http://{% current_domain %}/chat/room/{{room.name}}/" class="button">join</a>
 						{% endif %}
 						<a href="http://..." class="button" onclick="return false">history</a>
 						<a href="http://..." class="button" onclick="return false">conversations</a>

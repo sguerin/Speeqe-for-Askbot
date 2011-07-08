@@ -147,7 +147,7 @@ Speeqe.Chat.prototype = {
     newRoom: function(room) {
 	var url = ["http://",
 		   Speeqe.HTTP_DOMAIN,
-		   "/room/",
+		   "/chat/room/",
 		   room,
 		   "/"];
 

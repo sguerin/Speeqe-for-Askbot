@@ -37,7 +37,7 @@ BOSH_URL = "/http-bind"
 #entry is the title, followed by the room url.  You can use /room/ or
 #the dns trick if you have that setup.
 #since the room must exist, the room url is not used anymore.
-FEATURED_ROOMS =  {'ore':'/room/ore/', 'mad':'/room/mad/', }
+FEATURED_ROOMS =  {'ore':'/chat/room/ore/', 'mad':'/chat/room/mad/', }
 
 #where all your django templates live.  make sure to have the location
 #of your themes and client.html, test_client.html in this config
