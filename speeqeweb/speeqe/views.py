@@ -111,10 +111,7 @@ def xmpp_auth(request):
 	errors = {}
 	"""auth with xmpp server."""
 	username = request.POST.get('username')
-	fullusername = username
-	if username.find("@") == -1:
-		fullusername = username + "@" + settings.XMPP_DOMAIN
-
+	username = username.split('@')[0]
 	password = request.POST.get('password')
 	if not request.session.test_cookie_worked():
 		#set the cookie again to see if it works
@@ -122,13 +119,12 @@ def xmpp_auth(request):
 		if not request.session.test_cookie_worked():
 			errors['general'] = ['You do not seem to be accepting cookies. Please enable them and try again.']
 
-
-	ip_address = request.META.get('HTTP_X_FORWARDED_FOR',
+        ip_address = request.META.get('HTTP_X_FORWARDED_FOR',
 				      request.META.get('REMOTE_ADDR',
 						       '')).split(', ')[-1]
 	#Validate username and password via PunJab
 	try:
-		pc = PunjabClient(fullusername+random_resource(),
+		pc = PunjabClient(username+random_resource(),
 				  password,
 				  host=settings.BOSH_HOST,
 				  port=settings.BOSH_PORT,
@@ -157,13 +153,11 @@ def xmpp_auth(request):
 def create_django_session(request):
 	""" create django session."""
 	username = request.POST.get('username')
-	fullusername = username
-	if username.find("@") == -1:
-		fullusername = username + "@" + settings.XMPP_DOMAIN
+	username = username.split('@')[0]
 	password = request.POST.get('password');
 	request.session['user_password'] = password
 				
-	user,created = User.objects.get_or_create(username=fullusername)
+	user,created = User.objects.get_or_create(username=username)
 	#set the given password
 	user.set_password(password)
 	user.save()
@@ -224,10 +218,11 @@ def client(request,room_name=None,virtual_name=None):
                 room = virtual_name.replace("."+settings.HTTP_DOMAIN,"")
 
         userpassword = None
-	pcjid = None
-	pcresource = None
-	fullusername = request.user.username
-	ip_address = request.META.get('HTTP_X_FORWARDED_FOR',
+        pcjid = None
+        pcresource = None
+        username = request.user.username
+        xmppusername = username + "@" + settings.XMPP_DOMAIN
+        ip_address = request.META.get('HTTP_X_FORWARDED_FOR',
 				      request.META.get('REMOTE_ADDR', '')).split(', ')[-1]
 	if not 'nologin' in request.GET and request.user.is_authenticated(): 
 		userpassword = request.session.get('user_password',None)
@@ -240,7 +235,7 @@ def client(request,room_name=None,virtual_name=None):
 	
 	return render_response(request,
 			       'autologinclient.html',
-			       {'username': fullusername,
+			       {'username': xmppusername,
 				'userpassword': userpassword,
 				'pcjid':pcjid,
 				'pcresource':pcresource,
