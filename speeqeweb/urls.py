@@ -21,8 +21,3 @@ urlpatterns = patterns('',
     (r'^chat/$','speeqeweb.speeqe.views.index'),
     (r'^$','speeqeweb.speeqe.views.index'),
 )
-
-if settings.SERVE_STATIC_URLS:
-    urlpatterns += patterns('',
-                            (r'^(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.DOCUMENT_ROOT }),
-                            )
