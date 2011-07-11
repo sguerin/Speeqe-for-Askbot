@@ -13,10 +13,6 @@ EXACT_BAD_WORDS = ['crap']
 #be rejected.
 MATCH_BAD_WORDS = ['crap'] 
 
-#where all your static documents are.
-DOCUMENT_ROOT = '/var/www/speeqe/speeqeweb/media'
-#DOCUMENT_ROOT = '/usr/local/virtualenv/askbot/lib/python2.6/site-packages/askbot/deps/speeqeweb/media'
-
 #the user used to list active rooms on the website. the speeqe website
 #needs a user and password to connect and run disco requests. This is
 #to gather a list of active rooms from the muc component.
@@ -50,8 +46,6 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
-#allows django to serve all unknown urls as static data
-SERVE_STATIC_URLS = True
 #tells speeqe that you have the dns trick configured. (ie. you can use
 #http://roomname.yourdomain.com). False if dns names are not configured.
 DNS_ROOM_NAMES = False
