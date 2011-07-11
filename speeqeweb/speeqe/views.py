@@ -107,6 +107,7 @@ def join(request):
 	return ret_response
 
 def xmpp_auth(request):
+#TODO : understand why it does not work with Openfire
 	errors = {}
 	"""auth with xmpp server."""
 	username = request.POST.get('username')
@@ -229,9 +230,7 @@ def client(request,room_name=None,virtual_name=None):
 	ip_address = request.META.get('HTTP_X_FORWARDED_FOR',
 				      request.META.get('REMOTE_ADDR', '')).split(', ')[-1]
 	if not 'nologin' in request.GET and request.user.is_authenticated(): 
-
 		userpassword = request.session.get('user_password',None)
-		
 		if 'cred' in request.GET and userpassword:
 			
 			resp = HttpResponse(userpassword)
