@@ -30,14 +30,14 @@ body {
 }
 
 .topround  {
-    background:url("/images/roundtop.png") no-repeat;
+    background:url("/speeqe/media/images/roundtop.png") no-repeat;
     height:5px;
     width:599px;
     font-size:1px;
 }
 
 .bottomround  {
-    background:url("/images/roundbottom.png") no-repeat;
+    background:url("/speeqe/media/images/roundbottom.png") no-repeat;
     height:5px;
     width:599px;
     padding:0px 0px 10px 0px;
@@ -72,7 +72,7 @@ body {
 
 .tabs li .leftcorner  {
     height:24px;
-    background:url("/images/leftcorner.png") no-repeat 0px -24px;
+    background:url("/speeqe/media/images/leftcorner.png") no-repeat 0px -24px;
     width:6px;
     float:left;
 }
@@ -86,7 +86,7 @@ body {
 
 .tabs li .rightcorner  {
     height:24px;
-    background:url("/images/rightcorner.png") no-repeat 0px -24px;
+    background:url("/speeqe/media/images/rightcorner.png") no-repeat 0px -24px;
     width:6px;
     float:left;
     margin:0px 2px 0px 0px;
@@ -96,7 +96,7 @@ body {
 
 .tabs li .leftcorneractive {
     height:24px;
-    background:url("/images/leftcorner.png") no-repeat;
+    background:url("/speeqe/media/images/leftcorner.png") no-repeat;
     width:6px;
     float:left;
 }
@@ -110,7 +110,7 @@ body {
 
 .tabs li .rightcorneractive  {
     height:24px;
-    background:url("/images/rightcorner.png") no-repeat;
+    background:url("/speeqe/media/images/rightcorner.png") no-repeat;
     width:6px;
     float:left;
     margin:0px 2px 0px 0px;
@@ -176,7 +176,7 @@ body {
     margin-top:50px;
 }
 input {
-    background:url("/images/inputbg.png") no-repeat;
+    background:url("/speeqe/media/images/inputbg.png") no-repeat;
     border:1px solid #666;
     padding:4px;
     margin:1px;
@@ -250,14 +250,14 @@ input {
 .clear{clear:both;}
 
 #validusername {
-    background:url("/images/bullet.png") no-repeat;
+    background:url("/speeqe/media/images/bullet.png") no-repeat;
     width:16px;
     height:16px;
     display:inline;
 }
 
 #validpassword, #validemail {
-    background:url("/images/bullet.png") no-repeat;
+    background:url("/speeqe/media/images/bullet.png") no-repeat;
     width:16px;
     height:16px;
     display:inline;

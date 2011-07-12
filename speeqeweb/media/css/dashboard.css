@@ -10,7 +10,7 @@
 	height: 26px;
         width: 98%;
 	padding: .5% 1%;
-	background: url('/images/dashboard/gradient.png') top left repeat-x #555;
+	background: url('/speeqe/media/images/dashboard/gradient.png') top left repeat-x #555;
 	color: #fff;
 	border-bottom: 1px solid #444;
   	z-index: 10;
@@ -76,12 +76,12 @@
 #left-control span#dashboard_user 		{ padding-right: 0; }
 #left-control span#dashboard_available
 {
-   background: url('/images/dashboard/available.png') center right no-repeat;
+   background: url('/speeqe/media/images/dashboard/available.png') center right no-repeat;
    display:none;
 }
 
-#left-control span#away 		{ background: url('/images/dashboard/away.png') center right no-repeat; }
-#left-control span#sign-on-off	{ background: url('/images/dashboard/sign_off.png') center right no-repeat; }
+#left-control span#away 		{ background: url('/speeqe/media/images/dashboard/away.png') center right no-repeat; }
+#left-control span#sign-on-off	{ background: url('/speeqe/media/images/dashboard/sign_off.png') center right no-repeat; }
 
 #left-control ul li
 {
@@ -94,6 +94,7 @@
 
 #right-control p#show_help_dialog 			{ background: url('/speeqe/media/images/dashboard/help.png') center no-repeat #393939; }
 #right-control p#configure_chat 		{ background: url('/speeqe/media/images/dashboard/settings.png') center no-repeat #393939; }
+#right-control ul li.clicked p 	{ background: url('/speeqe/media/images/dashboard/close.png') center no-repeat #393939 !important; }
 
 #right-control ul li
 {
@@ -130,7 +131,7 @@
 	line-height: 1.5em;
 }
 
-#dashboard ul ul li:first-child 		{ background: url('/images/dashboard/shadow.jpg') top left repeat-x #393939; }	
+#dashboard ul ul li:first-child 		{ background: url('/speeqe/media/images/dashboard/shadow.jpg') top left repeat-x #393939; }	
 	
 #dashboard ul ul li:first-child:hover 	{ background-image: none; }
 #dashboard ul ul li:hover 				{ background-color: #444; }

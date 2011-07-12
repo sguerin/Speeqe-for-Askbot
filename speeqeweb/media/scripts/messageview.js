@@ -285,7 +285,7 @@ Speeqe.MessageView.prototype = {
     },
 
     displayErrorMessage: function(stanza) {
-	var room_avatar = '/images/murex/defaultavatar.png';
+	var room_avatar = '/speeqe/media/images/murex/defaultavatar.png';
 	var room = $(stanza).attr("from").split("/")[0];
 	this.displayMessage(room,room_avatar,stanza,false);
     },
@@ -299,7 +299,7 @@ Speeqe.MessageView.prototype = {
 	{
 	    kick_or_ban = "banned";
 	}
-	var room_avatar = '/images/murex/defaultavatar.png';
+	var room_avatar = '/speeqe/media/images/murex/defaultavatar.png';
 	var kick_message_ar = ["<message from='",
 			       $(stanza).attr("from"),			       
 			       "' to='4@dev.speeqe.com/3' id='1' type='groupchat'><x xmlns='jabber:x:event'><composing/></x></message>"

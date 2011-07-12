@@ -30,7 +30,7 @@ Speeqe.helpDialogInit = function() {
      </div><div id=\"backgroundPopup\"></div>";
 
     var helpdialog_elem = $(help_dialog_html);
-    var style_elem = "<link rel=\"stylesheet\" type=\"text/css\" href=\"/css/helpdialog.css\" />";
+    var style_elem = "<link rel=\"stylesheet\" type=\"text/css\" href=\"/speeqe/media/css/helpdialog.css\" />";
     $("head").append(style_elem);
     $("body").prepend(helpdialog_elem);
 

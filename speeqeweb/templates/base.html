@@ -4,11 +4,11 @@
 {% use_dns_room_names %}
 <head>
 <title>{% block title %}Chat rooms list{% endblock %}</title>
-<link rel="stylesheet" href="/css/style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="/speeqe/media/css/style.css" type="text/css" media="screen" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 <script type="text/javascript">
 // If googleapis failed, load locally
-!window.jQuery && document.write(unescape('%3Cscript src="/scripts/jquery-1.4.4.js"%3E%3C/script%3E'))
+!window.jQuery && document.write(unescape('%3Cscript src="/speeqe/media/scripts/jquery-1.4.4.js"%3E%3C/script%3E'))
 </script>
 
 <script type="text/javascript">
@@ -53,7 +53,7 @@
 					{% if user.is_authenticated %}
 					    <input class="button" value="Go" target="_blank" type="submit">
 			        {% else %}
-                        <input class="button" value="Go" href="http://{% current_domain %}/account/signin/?next=http://{% current_domain %}/chat/">
+					    <a href="/account/signin/?next=/chat/" class="button">Log in</a>
                     {% endif %}
 			        {% if dns_room_names %}
 						<label>.{% current_domain %}</label>
@@ -64,19 +64,22 @@
 			{% show_rooms %}
 			{% for room in rooms %}
                 {% if room.is_featured %}
+                <!--
                 <div class="roomcard showmore">
+                -->
+                <div class="roomcard ">
                 {% else %}
 				<div class="roomcard ">
                 {% endif %}
 					<div class="room-header">
 						<h3>
                             {% if room.is_featured %}
-                                <img class="small-site-logo" title="Support team" src="/images/murex/fireman.png" height="16" width="16">
+                                <img class="small-site-logo" title="Support team" src="/speeqe/media/images/murex/fireman.png" height="16" width="16">
                             {% endif %}
 							{% if user.is_authenticated %}
-							    <span class="room-name"><a target="_blank" href="http://{% current_domain %}/chat/room/{{room.name}}/">{{room.name}}</a></span>
+							    <span class="room-name"><a target="_blank" href="/chat/room/{{room.name}}/">{{room.name}}</a></span>
 							{% else %}
-								<span class="room-name"><a href="http://{% current_domain %}/account/signin/?next=http://{% current_domain %}/chat/room/{{room.name}}/">{{room.name}}</a></span>
+								<span class="room-name"><a target="_blank" href="/account/signin/?next=/chat/room/{{room.name}}/">{{room.name}}</a></span>
 							{% endif %}
 						</h3>
 						<div class="room-description clear-both">{{room.description}}</div>
@@ -88,9 +91,9 @@
 					<div class="clear-both"></div>
 					<div class="actions">
                         {% if user.is_authenticated %}
-						<a href="http://{% current_domain %}/chat/room/{{room.name}}/" target="_blank" class="button">join</a>
+						<a href="/chat/room/{{room.name}}/" target="_blank" class="button">join</a>
                         {% else %}
-                        <a href="http://{% current_domain %}/account/signin/?next=http://{% current_domain %}/chat/room/{{room.name}}/" class="button">join</a>
+                        <a href="/account/signin/?next=/chat/room/{{room.name}}/" target="_blank" class="button">join</a>
 						{% endif %}
 						<a href="http://..." class="button" onclick="return false">history</a>
 						<a href="http://..." class="button" onclick="return false">conversations</a>

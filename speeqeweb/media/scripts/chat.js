@@ -185,7 +185,7 @@ Speeqe.Chat.prototype = {
 	this._buildAndSendMessage(user,message,"chat");
 
 	//Display a dummy message to notify user that it was sent.
-	var srcurl = '/images/murex/defaultavatar.png';
+	var srcurl = '/speeqe/media/images/murex/defaultavatar.png';
 	var stanza_ar = ["<message to='",
 			 user,
 			 "' from='",

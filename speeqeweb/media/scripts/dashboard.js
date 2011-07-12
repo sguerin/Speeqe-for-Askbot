@@ -41,12 +41,12 @@ Speeqe.dashBoardInit = function() {
                 </div> \
 ";
     var dashboard_elem = $(dashboard_html);
-    var style_elem = "<link rel=\"stylesheet\" type=\"text/css\" href=\"/css/dashboard.css\" />";
+    var style_elem = "<link rel=\"stylesheet\" type=\"text/css\" href=\"/speeqe/media/css/dashboard.css\" />";
     $("head").append(style_elem);
     //test if ie and add ie specific style
     if($.browser.msie)
     {
-	var style_elem_ie = "<link rel=\"stylesheet\" type=\"text/css\" href=\"/css/dashboardie.css\" />";
+	var style_elem_ie = "<link rel=\"stylesheet\" type=\"text/css\" href=\"/speeqe/media/css/dashboardie.css\" />";
 	$("head").append(style_elem_ie);
     }
     $("body").prepend(dashboard_elem);

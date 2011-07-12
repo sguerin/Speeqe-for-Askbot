@@ -44,7 +44,7 @@ Speeqe.RosterItemView.prototype =  {
             }
             else
             {
-                img_src = "/images/defaultavatar.png";
+                img_src = "/speeqe/media/images/defaultavatar.png";
             }
             if (img)
             {
@@ -73,12 +73,12 @@ Speeqe.RosterItemView.prototype =  {
         else
         {
             online_avatar.attr("src",
-                               '/images/defaultavatar.png');
+                               '/speeqe/media/images/defaultavatar.png');
             online_avatar.attr("id",'onlineavatar'+roster_item.id);
             online_avatar.attr("alt",displaynick);
             online_avatar.error(function () {
                 $(this).unbind("error").attr("src",
-                                             "/images/defaultavatar.png");
+                                             "/speeqe/media/images/defaultavatar.png");
             });
         }
         li_clone.find("#roster_name").text(displaynick);
@@ -165,7 +165,7 @@ Speeqe.RosterItemView.prototype =  {
             }
             if (Speeqe.IE6)
             {
-                img_elem.attr("src","/images/blank.gif");
+                img_elem.attr("src","/speeqe/media/images/blank.gif");
                 var filter =
                     ["progid:DXImageTransform.Microsoft.AlphaImageLoader(src='",
                      this.service,
@@ -219,7 +219,7 @@ Speeqe.RosterItemView.prototype =  {
         var cleannick = Strophe.unescapeNode(nick);
         if (chatwindow.hasClass('joinleave'))
         {
-            var room_avatar = '/images/murex/defaultavatar.png';
+            var room_avatar = '/speeqe/media/images/murex/defaultavatar.png';
             var join_message_ar = ["<message from='",
                                    cleannick,
                                    "' to='4@dev.speeqe.com/3' id='1' type='groupchat'><x xmlns='jabber:x:event'><composing/></x><body>/me has ",
