@@ -14,16 +14,8 @@ Speeqe.dashBoardInit = function() {
     
     //dashboard html
     var dashboard_html = "<div id=\"dashboard\"> \
-                        <div id=\"left-control\" class=\"control item\"> \
-                                <ul> \
-                                        <li class=\"button\"> \
-                                                <p><span id=\"dashboard_user\">Offline</span> <span id=\"dashboard_available\">is available</span></p> \
-                                                <ul> \
-                                                        <li id=\"dashboard_signoff\" style=\"display:none;\" ></span>Sign Off</span></li> \
-                                                        <li id=\"dashboard_signon\"><span>Sign On</span></li> \
-                                                </ul> \
-                                        </li> \
-                                </ul> \
+                        <div class=\"control item\"> \
+                            <span id=\"roomname\"></span>@<span id=\"roomdomainname\"></span> \
                         </div> \
                         <div id=\"free-space\" class=\"item\"> \
                                 <p></p> \

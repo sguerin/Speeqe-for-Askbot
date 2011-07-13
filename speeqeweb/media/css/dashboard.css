@@ -3,7 +3,7 @@
 
 #dashboard
 {
-	font-size: .7em;
+	font-size: 1.2em;
 	font-family: Verdana, Arial, sans-serif;
         position: fixed;
         top: 0px;
@@ -67,34 +67,11 @@
 	left: -9999px;
 }
 
-
-
-/* Left Control Items 
--------------------------------------------------- */
-
-#left-control span 				{ padding-right: 25px; }
-#left-control span#dashboard_user 		{ padding-right: 0; }
-#left-control span#dashboard_available
-{
-   background: url('/speeqe/media/images/dashboard/available.png') center right no-repeat;
-   display:none;
-}
-
-#left-control span#away 		{ background: url('/speeqe/media/images/dashboard/away.png') center right no-repeat; }
-#left-control span#sign-on-off	{ background: url('/speeqe/media/images/dashboard/sign_off.png') center right no-repeat; }
-
-#left-control ul li
-{
-	float: left;
-	margin-right: 10px;
-}
-
 /* Right Control Items 
 -------------------------------------------------- */
 
 #right-control p#show_help_dialog 			{ background: url('/speeqe/media/images/dashboard/help.png') center no-repeat #393939; }
 #right-control p#configure_chat 		{ background: url('/speeqe/media/images/dashboard/settings.png') center no-repeat #393939; }
-#right-control ul li.clicked p 	{ background: url('/speeqe/media/images/dashboard/close.png') center no-repeat #393939 !important; }
 
 #right-control ul li
 {

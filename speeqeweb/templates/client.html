@@ -6,13 +6,6 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
 	<link rel="stylesheet" href="/speeqe/media/css/default.css" type="text/css" media="screen" />
-    <!--
-<<<<<<< HEAD
-	<link rel="stylesheet" href="/speeqe/media/css/default.css" type="text/css" media="screen" />
-=======
-	<link rel="stylesheet" href="/speeqe/media/css/default_from_client.css" type="text/css" media="screen" />
->>>>>>> 81930bc... add an alias in apache config and chnage the path to media files using this alias
-	-->
     <title>chat room thread</title>{% block getcred %} {% endblock %}
 
   </head>
@@ -50,26 +43,17 @@
       </div>
     </div>    
     <div id="container">
-      <div id="header">
-        <ul id="menu">
-        </ul>
-        <h1>
-          <span id="roomname"></span>@<span id="roomdomainname"></span><span id="outer_room_topic" style="display:none;"> (<span id="room_topic"></span>)</span>
-        </h1>
-        <div class="clear"></div>
-      </div>
       <div id="sidebar">
-
         <div id="chatstatus">
           <strong id="login_username"></strong>
           <br />
-          <span id="status_disconnected"><a href="javascript:this.location.reload();"><img
-            src="/images/default_theme/disconnected.png" alt="disconnected" border="0" /></a>
-            disconnected</span>
+          <span id="status_disconnected"><abbr title="click to signin"><a href="javascript:this.location.reload();"><img
+            src="/speeqe/media/images/default_theme/disconnected.png" alt="disconnected" border="0" /> disconnected</a></abbr></span>
+	
           <span id="status_authentication_failed">authentication failed</span>
           <span id="status_connect_failed">connection failed</span>
-          <span id="status_connected"><abbr title="click to sign off"><a href="javascript:void(0)"><img src="/speeqe/media/images/default_theme/connected.png" alt="connected" />
-            connected</a></abbr></span>
+          <span id="status_connected"><abbr title="press esc to sign off"><img src="/speeqe/media/images/default_theme/connected.png" alt="connected" />
+            connected</abbr></span>
           <div id="chat_joining_room">
             Joining Room.....</div>
           <span id="status_authenticating">authenticating..</span>

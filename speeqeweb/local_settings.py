@@ -43,7 +43,7 @@ FEATURED_ROOMS =  {'ore':'/chat/room/ore/', 'mad':'/chat/room/mad/', }
 #of your themes and client.html, test_client.html in this config
 #option
 TEMPLATE_DIRS = (
-    '/var/www/speeqe/speeqeweb/templates',
+#    '/var/www/speeqe/speeqeweb/templates',
     '/usr/local/virtualenv/askbot/lib/python2.6/site-packages/askbot/deps/speeqeweb/templates',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
