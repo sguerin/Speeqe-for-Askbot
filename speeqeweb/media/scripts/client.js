@@ -191,14 +191,11 @@ var Speeqe = {
 		    });
 		});
 
-	        $("#dashboard_signoff").click(function() {
+	    $("#status_connected").click(function() {
 		    app.disconnect();
+			app._connection.disconnect();
 		});
 	
-		$("#dashboard_signon").click(function() {
-		    $(this).parent("ul").hide();
-		    window.location.reload();
-		});
 		Speeqe.helpDialogInit();
 		
 		/*
