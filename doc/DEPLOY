@@ -1,0 +1,473 @@
+HOW TO DEPLOY SPEEQE
+====================
+
+introduction
+------------
+
+This document explains briefly how to deploy Speeqe on Redhat, using virtualenv and apache.
+
+The doc has been written with asciidoc : http://www.methods.co.nz/asciidoc/userguide.html +
+Here is an example of a command line to generate the html file on windows :
+--------------------------------------
+asciidoc.py -a toc -a icons "D:\workspace\tribe\speeqe\doc\DEPLOY"
+--------------------------------------
+
+
+binaries
+--------
+
+dependencies
+~~~~~~~~~~~~
+
+If sqeepe is deployed as a standalone app, you must first create a dedicated virtualenv:
+
+-------------
+# virtualenv-2.6 /usr/local/virtualenv/speeqe
+-------------
+	The new python executable is in /usr/local/virtualenv/speeqe/bin/python2.6
+	Python packages will be deployed in	/data/local/virtualenv/speeqe/lib/python2.6/site-packages
+		
+add commands in "~/.bashrc"
+-------------
+# alias pip-speeqe='/usr/local/virtualenv/speeqe/bin/pip'
+# alias python-speeqe='/usr/local/virtualenv/speeqe/bin/python2.6'
+-------------
+
+If sqeepe is deployed as a module of askbot, the pip installer must corresponds to the virtualenv of askbot.
+
+
+django>=0.9.6 (already deployed by askbot)
+-------
+pip-speeqe install django
+-------
+
+pil (Python Imaging Library): http://www.pythonware.com/products/pil/ +
+(already deployed by askbot)
+-------
+pip-speeqe install pil
+-------
+
+xmpppy (easy scripting with Jabber) : http://xmpppy.sourceforge.net/ 
+-------
+pip-speeqe install xmpppy
+-------
+
+punjab : 
+
+- http://punjab.sourceforge.net/jwchat.html
+- https://github.com/twonds/punjab/blame/master/INSTALL.txt
+	
+get the latest punjab from github (0.15) not the one from http://punjab.sourceforge.net/jwchat.html
+-------
+# git clone http://github.com/twonds/punjab.git -b master
+# cd punjab
+# python-speeqe setup.py install
+-------
+
+Twisted http://twistedmatrix.com/trac/wiki/Downloads 
+-------
+# pip-speeqe install twisted 
+-------
+or the last version with
+-------
+wget http://twistedmatrix.com/Releases/Twisted/11.0/Twisted-11.0.0.tar.bz2
+# bzip2 -d Twisted-11.0.0.tar.bz2
+# tar -xf Twisted-11.0.0.tar
+# cd Twisted-11.0.0
+# python-speeqe setup.py install
+-------
+and its dependencies +
+
+Twisted-words >= 0.6.0 
+-------
+# wget http://twistedmatrix.com/Releases/Words/11.0/TwistedWords-11.0.0.tar.bz2
+# bzip2 -d TwistedWords-11.0.0.tar.bz2
+# tar -xf TwistedWords-11.0.0.tar
+# cd TwistedWords-11.0.0
+# python-speeqe setup.py install
+-------
+
+Twisted-web >= 0.5.0 : http://twistedmatrix.com/Releases/Web/11.0/TwistedWeb-11.0.0.tar.bz2
+
+
+Twisted-conch >= 0.5.0 : http://twistedmatrix.com/Releases/Conch/11.0/TwistedConch-11.0.0.tar.bz2
+	
+Install pypoenssl or pydns : 
+
+-------	
+# pip-speeqe install pyopenssl
+-------
+
+
+Speeqe itself
+~~~~~~~~~~~~~
+
+get the lastest revision of source code :
+
+----------------
+# cd /root/data
+# git clone https://sguerin@github.com/sguerin/Speeqe-for-Askbot.git -b askbot
+----------------
+
+
+If speeqe is deployed as a standalone app : +
+copy the directory speeqeweb/webroot to for example /var/www/speeqeweb/webroot +
+else +
+copy the directory speeqeweb/webroot to /usr/local/virtualenv/askbot/lib/python2.6/site-packages/askbot/deps/
+
+
+Speeqe config
+-------------
+
+The followning parameters must be updated to fit your configuration:
+
+scripts/local_settings.js
+----------------
+Speeqe.XMPP_DOMAIN = "tribe.com";
+Speeqe.HTTP_DOMAIN = "tribe.com";
+Speeqe.CHAT_SERVER = "conference.tribe.com";
+Speeqe.DEFAULT_CHAT_ROOM = "default@conference.tribe.com";
+Speeqe.BOSH_URL =  "/http-bind";
+----------------
+
+settings.py
+------		
+DATABASE_ENGINE = 'mysql'
+DATABASE_NAME = 'speeqe'
+DATABASE_USER = 'speeqe' 
+-------
+
+local_settings.py
+-------	
+HTTP_DOMAIN = "ask"
+XMPP_DOMAIN = "tribe"
+XMPP_USER = ''
+XMPP_PASS = ''
+XMPP_CHAT = 'conference.tribe.com'
+BOSH_HOST = "tribe.com"
+BOSH_PORT = "7070"
+BOSH_URL = "/httpbind"
+TEMPLATE_DIRS = (
+#    '/var/www/speeqe/speeqeweb/templates',
+    '/usr/local/virtualenv/askbot/lib/python2.6/site-packages/askbot/deps/speeqeweb/templates',
+-------
+
+
+
+Database
+--------
+
+if speeqe is not deployed as as module of askbot, create dedicated database :
+
+-----------
+# mysql -u root -p
+mysql> CREATE USER 'speeqee'@'localhost';
+mysql> CREATE DATABASE `speeqe` DEFAULT CHARACTER SET UTF8 COLLATE utf8_general_ci;
+mysql> GRANT ALL PRIVILEGES ON  speeqe.* TO speeqe@localhost;
+mysql> flush privileges;
+mysql> SHOW GRANTS FOR 'speeqe'@'localhost';
+----------
+
+
+reuse askbot database : the code has been udpated in order to not needed specific tables like authreg.
+
+database schemata creation :
+---------
+python-speeqe manage.py syncdb
+---------
+
+
+Apache
+------
+
+speeqe as a standalone app
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+with a dedicated installation
+
+----------------
+NameVirtualHost *:80
+WSGIPythonHome /usr/local/virtualenv/speeqe
+<VirtualHost *:80>
+    DocumentRoot /var/www/speeqe
+    ServerName speeqe
+	ServerAlias speeqe
+	Alias /speeqe/media/ /var/www/speeqe/speeqeweb/media/
+    WSGIDaemonProcess speeqe-apache \
+        python-path=/usr/local/virtualenv/askbot
+    WSGIScriptAlias / /var/www/speeqe/speeqeweb/django.wsgi
+    <Location "/http-bind">
+        ProxyPass http://tribe:7070/http-bind/
+        ProxyPassReverse http://tribe:7070/http-bind/
+    </Location>
+</VirtualHost>
+----------------
+
+installed as a dependency in askbot
+
+----------------
+NameVirtualHost *:80
+WSGIPythonHome /usr/local/virtualenv/askbot
+<VirtualHost *:80>
+    DocumentRoot /usr/local/virtualenv/askbot/lib/python2.6/site-packages/askbot/deps/speeqeweb
+    ServerName askbot
+	ServerAlias speeqe
+    Alias /speeqe/media/ /usr/local/virtualenv/askbot/lib/python2.6/site-packages/askbot/deps/speeqeweb/media/
+    WSGIDaemonProcess speeqe-apache \
+        python-path=/usr/local/virtualenv/askbot
+    WSGIScriptAlias / /usr/local/virtualenv/askbot/lib/python2.6/site-packages/askbot/deps/speeqeweb/django.wsgi
+    <Location "/http-bind">
+        ProxyPass http://tribe:7070/http-bind/
+        ProxyPassReverse http://tribe:7070/http-bind/
+    </Location>
+</VirtualHost>
+----------------
+
+in askbot
+~~~~~~~~~
+
+---------------
+NameVirtualHost *:80
+WSGIPythonHome /usr/local/virtualenv/askbot
+<VirtualHost *:80>
+     DocumentRoot /var/www/askbot-forum
+     ServerName ask.com
+     ServerAlias ask
+     Alias /m/ /usr/local/virtualenv/askbot/lib/python2.6/site-packages/askbot/skins/
+     Alias /upfiles/ /var/www/askbot-forum/askbot/upfiles/
+     Alias /admin/media/ /usr/local/virtualenv/askbot/lib/python2.6/site-packages/django/contrib/admin/media/
+     Alias /render_primary/ /var/www/askbot-forum/askbot/upfiles/
+	 Alias /speeqe/media/ /usr/local/virtualenv/askbot/lib/python2.6/site-packages/askbot/deps/speeqeweb/media/
+     <DirectoryMatch "/var/www/askbot-forum/askbot/skins/([^/]+)/media">
+        Order deny,allow
+        Allow from all
+     </DirectoryMatch>
+     <Directory "/var/www/askbot-forum/askbot/upfiles">
+        Order deny,allow
+        Allow from all
+     </Directory>
+     WSGIDaemonProcess askbot-apache user=askbot group=apache\
+         python-path=/usr/local/virtualenv/askbot
+     WSGIProcessGroup askbot
+     WSGIScriptAlias / /var/www/askbot-forum/django.wsgi
+     LogLevel debug
+	 <Location "/http-bind">
+        ProxyPass http://tribe:7070/http-bind/
+        ProxyPassReverse http://tribe:7070/http-bind/
+    </Location>
+</VirtualHost>
+---------------
+
+
+
+BOSH Proxy
+----------
+
+BOSH (or HTTP binding) is a technique designed for asynchronous XMPP communication between client and server using HTTP.
+
+- BOSH architecture : http://trac.gajim.org/wiki/BOSH
+- BOSH spec : http://xmpp.org/extensions/xep-0124.html
+- http://metajack.wordpress.com/2008/07/02/xmpp-is-better-with-bosh/
+
+bosh connector with openfire
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	
+Update the openfire config to enable http-bind.
+
+
+if punjab is not used : enable bosh protocol in openfire. +
+in server settings/http binding :
+
+- Enabled
+- Clients can connect to this server using HTTP binding.
+
+-------
+port = 7070
+ssl port = 7443
+-------
+
+- Script Syntax
+-------
+Disabled - Does not allow clients with limited access to connect to the server
+-------
+
+
+
+The apache2 configuration (/etc/httpd/conf/httpd.conf) must be updated as follow.
+----------------
+<Location "/http-bind">
+    ProxyPass http://tribe:7070/http-bind/
+    ProxyPassReverse http://tribe:7070/http-bind/
+</Location>
+----------------
+
+	
+bosh connector with punjab
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you use ejabberd you must install punjab instead of using openfire bosh server.
+
+--------	
+# alias twistd-speeqe='/usr/local/virtualenv/speeqe/bin/twistd'
+# twistd-speeqe -y /var/www/punjab.tac
+--------
+
+example of a command to launch it : 
+------
+twistd-speeqe -no --logfile=/var/www/speeqe/speeqeweb/punjab.log --python=/var/www/speeqe/speeqeweb/punjab.tac
+------
+
+Here is the content of the file punjab.tac
+--------
+# punjab tac file
+from twisted.web import server, resource, static
+from twisted.application import service, internet
+from punjab.httpb  import Httpb, HttpbService
+root = static.File("./html")
+b = resource.IResource(HttpbService(1, use_raw=True))
+root.putChild('http-bind', b)
+site  = server.Site(root)
+application = service.Application("punjab")
+internet.TCPServer(5280, site).setServiceParent(application)
+--------
+
+
+The apache2 configuration (/etc/httpd/conf/httpd.conf) must be updated as follow.
+
+----------------
+<Location "/http-bind">
+    ProxyPass http://localhost:5280/http-bind/
+    ProxyPassReverse http://localhost:5280/http-bind/
+</Location>
+----------------
+
+
+
+
+Askbot Integration
+------------------
+
+as an embedded dependency
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Speeqe is deployed in the directory /deps of askbot like the others askbot dependecies that have been forked.
+
+Apache
+~~~~~~
+Add bosh proxy:
+-------
+<Location "/http-bind">
+    ProxyPass http://tribe:7070/http-bind/
+    ProxyPassReverse http://tribe:7070/http-bind/
+</Location>
+-------
+
+Add an alias to the speeqe media directory 
+-------
+Alias /speeqe/media/ /usr/local/virtualenv/askbot/lib/python2.6/site-packages/askbot/deps/speeqeweb/media/
+-------
+
+mysql
+~~~~~
+	no impact since all specific models of Speeqe have been removed.
+
+django config
+~~~~~~~~~~~~~
+settings.py of askbot :
+
+- refers to speeqe.local_settings
+- add "askbot.deps.speeqeweb.speeqe" & "askbot.deps.speeqeweb as apps in "INSTALLED_APPS"
+
+urls.py
+~~~~~~~
+askobot urls.py refers to urls_in_askbot.py if speeqe is an installed app.
+
+
+
+
+footnotes
+---------
+
+
+usefull links
+~~~~~~~~~~~~~
+
+- https://github.com/thepug/Speeqe
+- it seems that chat.stackoverflow is using speeqe : http://meta.osqa.net/questions/8049/can-comet-chat-be-installed-with-osqa
+- official setup documentation : https://github.com/thepug/Speeqe/wiki/SpeeqeSetup
+- xmpp muc specifications : http://xmpp.org/extensions/xep-0045.html
+- xmpppy source code : http://xmpppy.sourceforge.net/apidocs/index.html
+- http://stackoverflow.com/questions/4013588/configuring-punjab-to-send-xmpp-requests-to-openfire
+
+couchdb for message search in rooms
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+This feature has been removed since the implementation is specific to ejabbeard.
+
+
+reverse engineering based on the vm available on Turnkey
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+http://www.turnkeylinux.org/ejabberd
+
+----------------
+vm : 
+	root/root
+	admin/admin
+	http://172.21.29.244
+	https://172.21.29.244
+	webshell : https://172.21.29.244:12320
+	webmin : https://172.21.29.244:12321
+	EJD admin: webshell : https://172.21.29.244:12322
+	ssh/sftp : webshell : root@172.21.29.244 (port 22)
+	xmpp : ports 5222 (plain/tls), 5223 (legacy ssl)
+----------------
+
+----------------
+less /etc/apache2/sites-available/speeqeweb
+	NameVirtualHost *:80
+	NameVirtualHost *:443
+
+	<VirtualHost *:80>
+		UseCanonicalName Off
+		ServerAdmin  webmaster@localhost
+		DocumentRoot /var/www/django/speeqeweb/webroot
+	</VirtualHost>
+
+	<VirtualHost *:443>
+		SSLEngine on
+		SSLCertificateFile /etc/ssl/certs/cert.pem
+		ServerAdmin  webmaster@localhost
+		DocumentRoot /var/www/django/speeqeweb/webroot
+	</VirtualHost>
+
+	<Directory />
+		Options -Indexes All
+	</Directory>
+
+	<Location "/http-bind">
+		ProxyPass http://localhost:5280/http-bind/
+		ProxyPassReverse http://localhost:5280/http-bind/
+	</Location>
+
+	<Proxy *>
+		Allow from all
+	</Proxy>
+
+	<Location "/">
+		SetHandler python-program
+		PythonHandler django.core.handlers.modpython
+		SetEnv DJANGO_SETTINGS_MODULE speeqeweb.settings
+		PythonDebug On
+		PythonPath "['/var/www/django','/var/www/django/speeqeweb'] + sys.path"
+	</Location>
+
+	<Location "/admin_media">
+		SetHandler None
+	</Location>
+
+	<Location "/docs">
+		SetHandler None
+	</Location>
+----------------
+
+

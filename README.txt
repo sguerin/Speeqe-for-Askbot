@@ -6,15 +6,16 @@ Copyright 2007-2010, Nathan Zorn
 
 
 GENERAL INFORMATION
-	
-Speeqe is a web based client to XMPP/MUC rooms. 
+
+This django module is based on the project Speeqe which is a web based client to XMPP/MUC rooms . 
+
+The goal of this fork is to provide a django module for Askbot.
+ 
 For more information about speeqe see the following URL :
-	
 http://code.stanziq.com/speeqe
-	
+For more information about Askbot see the following URL :
+https://github.com/ASKBOT/askbot-devel
+
 	
 CONTRIBUTORS
-	Nathan Zorn nathan.zorn@gmail.com
-	Matt McInerney 
-	Bedrich Rios
-	Collin Grady
+	Samuel Guérin
